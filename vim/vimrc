@@ -1,5 +1,4 @@
 let mapleader = (' ')
-set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -36,6 +35,31 @@ inoremap <C-K> <C-W><C-K>
 inoremap <C-L> <C-W><C-L>
 inoremap <C-H> <C-W><C-H>
 
+" Navigating tabs
+" Normal Mode
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <C-Down> :tabprevious<CR>
+nnoremap <C-Up> :tabnext<CR>
+
+"Terminal Mode
+tnoremap <C-Left> :tabprevious<CR>
+tnoremap <C-Right> :tabnext<CR>
+tnoremap <C-Down> :tabprevious<CR>
+tnoremap <C-Up> :tabnext<CR>
+
+"Visual Mode
+vnoremap <C-Left> :tabprevious<CR>
+vnoremap <C-Right> :tabnext<CR>
+vnoremap <C-Down> :tabprevious<CR>
+vnoremap <C-Up> :tabnext<CR>
+
+"Insert Mode
+inoremap <C-Left> :tabprevious<CR>
+inoremap <C-Right> :tabnext<CR>
+inoremap <C-Down> :tabprevious<CR>
+inoremap <C-Up> :tabnext<CR>
+
 " Inbuilt fuzzy search
 set path+=**
 set wildmenu 
@@ -48,8 +72,8 @@ set shiftwidth=4
 set expandtab
 " Set ruler
 set ruler
-
-autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
+" Set hidden to switch between buffers without saving. Useful to run :wall
+set hidden
 
 " This file represents the minimal .vimrc needed to work with govim.
 "
@@ -99,6 +123,7 @@ set signcolumn=yes
 " will suffice, no autocmd required.
 autocmd! BufEnter,BufNewFile *.go syntax on
 autocmd! BufLeave *.go syntax off
+autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
 
 " Suggestion: turn on auto-indenting. If you want closing parentheses, braces
 " etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
@@ -120,12 +145,45 @@ endif
 "curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
+" Golang Plugin
 Plug 'govim/govim'
+
+" File Explorer 1
 Plug 'francoiscabrol/ranger.vim'
 
+" Session Management Plugins
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+
 " On-demand loading
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+
+" Prettify
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+
+" Search
+Plug 'vim-ctrlspace/vim-ctrlspace'
+
+"Git Plugins
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Open ranger instead of netrw when opening directory
 let g:ranger_replace_netrw = 1
+
+" Toggle NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Vim Session Manager
+:let g:session_command_aliases = 1
+
+" Ctrl+P for searching
+let g:CtrlSpaceDefaultMappingKey = "<C-p>"
+
+"Tmux StatusLine
+":Tmuxline airline
+":TmuxlineSnapshot ~/.vim/statusline.theme
