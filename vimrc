@@ -121,7 +121,11 @@ endif
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 Plug 'govim/govim'
+Plug 'francoiscabrol/ranger.vim'
 
 " On-demand loading
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 call plug#end()
+
+" Open ranger instead of netrw when opening directory
+let g:ranger_replace_netrw = 1
