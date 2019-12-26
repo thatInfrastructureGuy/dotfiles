@@ -188,6 +188,8 @@ let g:ranger_replace_netrw = 1
 
 " Toggle NerdTree
 map <C-n> :NERDTreeToggle<CR>
+" NerdTree bug: Remove ^G from view
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 "Vim Session Manager
 :let g:session_command_aliases = 1
@@ -196,7 +198,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:CtrlSpaceDefaultMappingKey = "<C-p>"
 
 " Notes Directory
-:let g:notes_directories = ['~/code/notes/', '~/code/personal/notes', '/tmp/notes']
+:let g:notes_directories = ['~/code/notes/', '~/code/personal/notes']
 
 "Tmux StatusLine
 ":Tmuxline airline
