@@ -7,6 +7,13 @@ set backspace=indent,eol,start
 set nu
 set rnu
 
+"Set Splits
+set splitbelow
+set splitright
+
+"Set terminal window size
+set termwinsize=10x0
+
 "Set highlighted search
 set hlsearch
 
@@ -149,6 +156,7 @@ call plug#begin()
 Plug 'govim/govim'
 
 " File Explorer 1
+Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 
 " Session Management Plugins
@@ -170,6 +178,9 @@ Plug 'vim-ctrlspace/vim-ctrlspace'
 "Git Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Note Taking
+Plug 'xolox/vim-notes'
 call plug#end()
 
 " Open ranger instead of netrw when opening directory
@@ -183,6 +194,9 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Ctrl+P for searching
 let g:CtrlSpaceDefaultMappingKey = "<C-p>"
+
+" Notes Directory
+:let g:notes_directories = ['~/code/notes/', '~/code/personal/notes', '/tmp/notes']
 
 "Tmux StatusLine
 ":Tmuxline airline
