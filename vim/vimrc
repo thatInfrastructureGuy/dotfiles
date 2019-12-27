@@ -185,6 +185,7 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 
 "Vim Session Manager
 :let g:session_command_aliases = 1
+:let g:session_autosave = 'no'
 
 " Ctrl+P for searching
 let g:CtrlSpaceDefaultMappingKey = "<C-p>"
