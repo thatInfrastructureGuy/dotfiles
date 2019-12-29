@@ -147,9 +147,9 @@ call plug#begin()
 " Golang Plugin
 Plug 'govim/govim'
 
-" File Explorer 1
-Plug 'rbgrouleff/bclose.vim'
-Plug 'francoiscabrol/ranger.vim'
+" Async Complete
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
 
 " Session Management Plugins
 Plug 'xolox/vim-misc'
@@ -175,9 +175,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'xolox/vim-notes'
 call plug#end()
 
-" Open ranger instead of netrw when opening directory
-let g:ranger_replace_netrw = 1
-
 " Toggle NerdTree
 map <C-n> :NERDTreeToggle<CR>
 " NerdTree bug: Remove ^G from view
@@ -197,3 +194,10 @@ let g:CtrlSpaceDefaultMappingKey = "<C-p>"
 ":Tmuxline airline
 ":TmuxlineSnapshot ~/.vim/statusline.theme
 
+" async complete with omni commands
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+\ 'name': 'omni',
+\ 'whitelist': ['*'],
+\ 'blacklist': ['c', 'cpp', 'html'],
+\ 'completor': function('asyncomplete#sources#omni#completor')
+\  }))
