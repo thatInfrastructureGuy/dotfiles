@@ -134,7 +134,8 @@ filetype indent on
 
 " Suggestion: define sensible backspace behaviour. See :help backspace for
 " more details
-set backspace=2
+"set backspace=2 // for vim < 5.4
+set backspace=indent,eol,start
 
 " Suggestion: show info for completion candidates in a popup menu
 if has("patch-8.1.1904")
