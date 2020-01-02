@@ -78,6 +78,7 @@ set shiftwidth=4
 set expandtab
 " Set ruler
 set ruler
+setlocal fileformat=unix
 " Set hidden to switch between buffers without saving. Useful to run :wall
 set hidden
 
