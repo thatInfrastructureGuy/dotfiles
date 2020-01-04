@@ -216,3 +216,39 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 let g:netrw_dirhistmax=0
 let g:netrw_liststyle=3
 
+" Folding
+" Use [of, ]of, cof to enable/disable/toggle the automatic closing/opening of folds
+nno <silent> [of :<c-u>call <sid>open_folds('enable')<cr>
+nno <silent> ]of :<c-u>call <sid>open_folds('disable')<cr>
+nno <silent> cof :<c-u>call <sid>open_folds(<sid>open_folds('is_active') ? 'disable' : 'enable')<cr>
+
+fu! s:open_folds(action) abort
+    if a:action ==# 'is_active'
+        return exists('s:open_folds')
+    elseif a:action ==# 'enable' && !exists('s:open_folds')
+        let s:open_folds = {
+        \                    'close'   : &foldclose,
+        \                    'column'  : &foldcolumn,
+        \                    'enable'  : &foldenable,
+        \                    'level'   : &foldlevel,
+        \                    'method'  : &foldmethod,
+        \                    'nestmax' : &foldnestmax,
+        \                    'open'    : &foldopen,
+        \                  }
+        set foldclose=all
+        set foldcolumn=1
+        set foldenable
+        set foldlevel=0
+        set foldmethod=syntax
+        set foldnestmax=1
+        set foldopen=all
+        echo '[auto open folds] ON'
+    elseif a:action ==# 'disable' && exists('s:open_folds')
+        for op in keys(s:open_folds)
+            exe 'let &fold'.op.' = s:open_folds.'.op
+        endfor
+        unlet! s:open_folds
+        echo '[auto open folds] OFF'
+    endif
+endfu
+
