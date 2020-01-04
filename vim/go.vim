@@ -1,7 +1,20 @@
-" Custom govim settings 
-nmap <silent> <buffer> <Leader>h : <C-u>call GOVIMHover()<CR>
-call govim#config#Set("CompleteUnimported", 1) " 1 => true
+" Vim-Go settings
+" Run goimports along gofmt on each save
+let g:go_fmt_command = "goimports"
+" Automatically get signature/type info for object under cursor
+let g:go_auto_type_info = 1
 
-nmap <silent> <buffer> <F2> :execute "GOVIMQuickfixDiagnostics" ^V| cw ^V| if len(getqflist()) > 0 && getwininfo(win_getid())[0].quickfix == 1 ^V| :wincmd p ^V| endif<CR>
-imap <silent> <buffer> <F2> <C-O>:execute "GOVIMQuickfixDiagnostics" ^V| cw ^V| if len(getqflist()) > 0 && getwininfo(win_getid())[0].quickfix == 1 ^V| :wincmd p ^V| endif<CR>
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_generate_tags = 1
+
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 
