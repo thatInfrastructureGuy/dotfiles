@@ -207,6 +207,9 @@ let g:go_fmt_command = "goimports"
 " Automatically get signature/type info for object under cursor 
 let g:go_auto_type_info = 1
 
+" Autocomplete prompt whenever you press the dot (.)
+au filetype go inoremap <buffer> . .<C-x><C-o>
+
 "Tmux StatusLine
 ":Tmuxline airline
 ":TmuxlineSnapshot ~/.vim/statusline.theme
