@@ -2,19 +2,26 @@ let mapleader = (' ')
 syntax enable
 filetype plugin indent on
 
-"Line Numbers
+" Line Numbers
 set nu
 set rnu
 
-"Set Splits
+" Set Splits
 set splitbelow
 set splitright
 
-"Set terminal window size
+" Set terminal window size
 set termwinsize=10x0
 
-"Set highlighted search
+" Set highlighted search
 set hlsearch
+
+" Change how vim represents characters on the screen
+set encoding=utf-8
+
+" Set the encoding of files written
+set fileencoding=utf-8
+
 
 " Navigating the split screens
 " Normal Mode
@@ -23,19 +30,19 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"Terminal Mode
+" Terminal Mode
 tnoremap <C-J> <C-W><C-J>
 tnoremap <C-K> <C-W><C-K>
 tnoremap <C-L> <C-W><C-L>
 tnoremap <C-H> <C-W><C-H>
 
-"Visual Mode
+" Visual Mode
 vnoremap <c-j> <c-w><c-j>
 vnoremap <c-k> <c-w><c-k>
 vnoremap <c-l> <c-w><c-l>
 vnoremap <c-h> <c-w><c-h>
 
-"Insert Mode
+" Insert Mode
 inoremap <C-J> <C-W><C-J>
 inoremap <C-K> <C-W><C-K>
 inoremap <C-L> <C-W><C-L>
@@ -48,19 +55,19 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-Down> :tabprevious<CR>
 nnoremap <C-Up> :tabnext<CR>
 
-"Terminal Mode
+" Terminal Mode
 tnoremap <C-Left> :tabprevious<CR>
 tnoremap <C-Right> :tabnext<CR>
 tnoremap <C-Down> :tabprevious<CR>
 tnoremap <C-Up> :tabnext<CR>
 
-"Visual Mode
+" Visual Mode
 vnoremap <C-Left> :tabprevious<CR>
 vnoremap <C-Right> :tabnext<CR>
 vnoremap <C-Down> :tabprevious<CR>
 vnoremap <C-Up> :tabnext<CR>
 
-"Insert Mode
+" Insert Mode
 inoremap <C-Left> :tabprevious<CR>
 inoremap <C-Right> :tabnext<CR>
 inoremap <C-Down> :tabprevious<CR>
@@ -72,21 +79,26 @@ set wildmenu
 
 " show existing tab with 4 spaces width
 set tabstop=4
+
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
+
+" control <tab> and <bs> keys to match tabstop
+set softtabstop=4
+
 " On pressing tab, insert 4 spaces
 set expandtab
+
 " Set ruler
 set ruler
-setlocal fileformat=unix
+
+" Set line endings in unix format
+set fileformat=unix
+
 " Set hidden to switch between buffers without saving. Useful to run :wall
 set hidden
 
 " This file represents the minimal .vimrc needed to work with govim.
-"
-" We also include a number of suggested settings that we think the majority of
-" users will like/prefer.
-
 set nocompatible
 set nobackup
 set nowritebackup
@@ -122,6 +134,16 @@ set balloondelay=250
 " case set signcolumn=number
 set signcolumn=number
 
+" Better display for messages
+set cmdheight=2
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.vim/undodir
+
 " template file creation
 autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
 
@@ -132,9 +154,7 @@ set autoindent
 set smartindent
 filetype indent on
 
-" Suggestion: define sensible backspace behaviour. See :help backspace for
-" more details
-"set backspace=2 // for vim < 5.4
+" Suggestion: define sensible backspace behaviour.
 set backspace=indent,eol,start
 
 " Suggestion: show info for completion candidates in a popup menu
@@ -147,7 +167,7 @@ endif
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 " Golang Plugin
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Session Management Plugins
 Plug 'xolox/vim-misc'
@@ -185,6 +205,37 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 " Notes Directory
 :let g:notes_directories = ['~/code/notes/', '~/code/personal/notes']
 
+" Autocomplete prompt whenever you press the dot (.)
+set completeopt+=menuone,noselect,noinsert
+au filetype go inoremap <buffer> . .<C-x><C-o>
+
 "Tmux StatusLine
 ":Tmuxline airline
 ":TmuxlineSnapshot ~/.vim/statusline.theme
+
+" ctrl-p
+let g:ctrlp_regexp = 1
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:netrw_dirhistmax=0
+let g:netrw_liststyle=3
+
+" Vim-Go settings
+" Run goimports along gofmt on each save
+let g:go_fmt_command = "goimports"
+" Automatically get signature/type info for object under cursor
+let g:go_auto_type_info = 1
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_generate_tags = 1
+
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
