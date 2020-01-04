@@ -147,11 +147,7 @@ endif
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 " Golang Plugin
-Plug 'govim/govim'
-
-" Async Complete
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'yami-beta/asyncomplete-omni.vim'
+Plug 'fatih/vim-go'
 
 " Session Management Plugins
 Plug 'xolox/vim-misc'
@@ -167,7 +163,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 
 " Search
-Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'kien/ctrlp.vim'
 
 "Git Plugins
 Plug 'tpope/vim-fugitive'
@@ -186,20 +182,9 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 :let g:session_command_aliases = 1
 :let g:session_autosave = 'no'
 
-" Ctrl+P for searching
-let g:CtrlSpaceDefaultMappingKey = "<C-p>"
-
 " Notes Directory
 :let g:notes_directories = ['~/code/notes/', '~/code/personal/notes']
 
 "Tmux StatusLine
 ":Tmuxline airline
 ":TmuxlineSnapshot ~/.vim/statusline.theme
-
-" async complete with omni commands
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-\ 'name': 'omni',
-\ 'whitelist': ['*'],
-\ 'blacklist': ['c', 'cpp', 'html'],
-\ 'completor': function('asyncomplete#sources#omni#completor')
-\  }))
