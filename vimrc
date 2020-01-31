@@ -191,7 +191,13 @@ Plug 'airblade/vim-gitgutter'
 
 " Note Taking
 Plug 'xolox/vim-notes'
+" Add License
+Plug 'antoyo/vim-licenses'
 call plug#end()
+
+" LicenseFile
+command! License call InsertLicense('licenseFile')
+let g:licenses_copyright_holders_name = 'Ashish Kulkarni <thatInfrastructureGuy@gmail.com>'
 
 " Toggle NerdTree
 map <C-n> :NERDTreeToggle<CR>
