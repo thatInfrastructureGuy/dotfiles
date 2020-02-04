@@ -196,8 +196,9 @@ Plug 'antoyo/vim-licenses'
 call plug#end()
 
 " LicenseFile
-command! License call InsertLicense('licenseFile')
-let g:licenses_copyright_holders_name = 'Ashish Kulkarni <thatInfrastructureGuy@gmail.com>'
+"command! License call InsertLicense('licenseFile')
+let g:licenses_copyright_holders_name = 'Kulkarni, Ashish <thatInfrastructureGuy@gmail.com>'
+let g:licenses_authors_name='Ashish Kulkarni'
 
 " Toggle NerdTree
 map <C-n> :NERDTreeToggle<CR>
