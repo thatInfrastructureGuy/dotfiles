@@ -6,3 +6,4 @@ export KUBE_EDITOR=vim
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+export GPG_TTY=$(tty)
