@@ -210,7 +210,7 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 :let g:session_autosave = 'no'
 
 " Notes Directory
-:let g:notes_directories = ['~/code/notes/', '~/code/personal/notes']
+:let g:notes_directories = ['~/code/golang-notes/', '~/code/personal/notes']
 
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
