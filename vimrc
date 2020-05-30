@@ -1,6 +1,7 @@
 let mapleader = (' ')
 syntax enable
 filetype plugin indent on
+colorscheme lucario
 
 " Line Numbers
 set number
