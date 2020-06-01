@@ -1,7 +1,8 @@
 let mapleader = (' ')
 syntax enable
 filetype plugin indent on
-colorscheme lucario
+
+"If X enabled
 
 " Line Numbers
 set number
@@ -194,7 +195,20 @@ Plug 'airblade/vim-gitgutter'
 Plug 'xolox/vim-notes'
 " Add License
 Plug 'antoyo/vim-licenses'
+
+" Custom Colors
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'fatih/molokai'
+
 call plug#end()
+
+" Custom Colors Settings
+let g:rehash256 = 1
+let g:molokai_original = 1
+colorscheme molokai
+
+" Golang Specific
+source ~/.vim/go.vim
 
 " LicenseFile
 "command! License call InsertLicense('licenseFile')
@@ -259,4 +273,3 @@ fu! s:open_folds(action) abort
         echo '[auto open folds] OFF'
     endif
 endfu
-
