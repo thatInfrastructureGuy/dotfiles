@@ -2,8 +2,6 @@ let mapleader = (' ')
 syntax enable
 filetype plugin indent on
 
-"If X enabled
-
 " Line Numbers
 set number
 set relativenumber
@@ -106,8 +104,6 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-filetype plugin on
-
 set mouse=a
 
 " To get hover working in the terminal we need to set ttymouse. See
@@ -154,7 +150,6 @@ autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
 " include this by default in govim.
 set autoindent
 set smartindent
-filetype indent on
 
 " Suggestion: define sensible backspace behaviour.
 set backspace=indent,eol,start
@@ -200,7 +195,19 @@ Plug 'antoyo/vim-licenses'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'fatih/molokai'
 
+" Undo Tree
+Plug 'mbbill/undotree'
+
+"Comment Toggle
+Plug 'preservim/nerdcommenter'
 call plug#end()
+
+" UndoTree Toggle
+nnoremap <leader>u :UndotreeToggle<cr>
+if has("persistent_undo")
+    set undodir=$HOME."/.undodir"
+    set undofile
+endif
 
 " Custom Colors Settings
 let g:rehash256 = 1
@@ -208,7 +215,7 @@ let g:molokai_original = 1
 colorscheme molokai
 
 " Golang Specific
-source ~/.vim/go.vim
+"source ~/.vim/go.vim
 
 " LicenseFile
 "command! License call InsertLicense('licenseFile')
