@@ -1,4 +1,4 @@
-let mapleader = (' ')
+let mapleader = (',')
 syntax enable
 filetype plugin indent on
 
@@ -142,9 +142,6 @@ set shortmess+=c
 set undofile
 set undodir=~/.vim/undodir
 
-" template file creation
-autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
-
 " Suggestion: turn on auto-indenting. If you want closing parentheses, braces
 " etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
 " include this by default in govim.
@@ -214,8 +211,13 @@ let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
 
-" Golang Specific
-"source ~/.vim/go.vim
+augroup file_type
+    autocmd!
+    autocmd BufRead,BufNewFile *.go setfiletype go
+    autocmd BufRead,BufNewFile *.proto setfiletype proto
+    " template file creation
+    autocmd BufNewFile * silent! 0r `pwd`/%:e.skeleton
+augroup END
 
 " LicenseFile
 "command! License call InsertLicense('licenseFile')
@@ -236,7 +238,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
-au filetype go inoremap <buffer> . .<C-x><C-o>
 
 " ctrl-p
 let g:ctrlp_regexp = 1
