@@ -25,6 +25,9 @@ export HISTCONTROL=ignoreboth
 # Show date/time in bash history
 export HISTTIMEFORMAT="%m/%d/%y %T "
 
+# Yubikey-Agent requirement on mac os.
+export SSH_AUTH_SOCK="/usr/local/var/run/yubikey-agent.sock"
+
 # Connect to vpn
 export OVPN_DIR=${HOME}/.ovpn
 alias oServer="docker run -d --rm --name=oServer --env-file=${OVAPN_DIR}/credentials -p 22222:22 -p=18888:8080 --cap-add=NET_ADMIN --device /dev/net/tun --dns=8.8.8.8 -v ${OVPN_DIR}:/app:ro thatinfrastructureguy/ovpn-socks-proxy:v0.0.1"
