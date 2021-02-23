@@ -37,3 +37,7 @@ alias oConnect="ssh -q -f -N -p 22222 -D 18888 -o 'UserKnownHostsFile=/dev/null'
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 export PATH="$PATH:/usr/local/opt/ruby/bin:$/usr/local/sbin"
+
+# Reload Yubikey
+alias reload_yubikey='gpg-connect-agent "scd serialno" "learn --force" /bye'
+alias refresh_shell="exec $SHELL -l"
