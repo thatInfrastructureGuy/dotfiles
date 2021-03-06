@@ -22,7 +22,6 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
-
 " Navigating the split screens
 " Normal Mode
 nnoremap <C-J> <C-W><C-J>
@@ -72,6 +71,23 @@ inoremap <C-Left> :tabprevious<CR>
 inoremap <C-Right> :tabnext<CR>
 inoremap <C-Down> :tabprevious<CR>
 inoremap <C-Up> :tabnext<CR>
+
+" Move lines up down with Alt+k and Alt+j 
+" Linux bindings
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Mac bindings
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Inbuilt fuzzy search
 set path+=**
@@ -130,7 +146,7 @@ set balloondelay=250
 " where there are quickfix errors. Some users who already show line number
 " might prefer to instead have the signs shown in the number column; in which
 " case set signcolumn=number
-set signcolumn=number
+set signcolumn=yes
 
 " Better display for messages
 set cmdheight=2
@@ -197,7 +213,22 @@ Plug 'mbbill/undotree'
 
 "Comment Toggle
 Plug 'preservim/nerdcommenter'
+
+"Interact with tmux
+Plug 'preservim/vimux'
 call plug#end()
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 " UndoTree Toggle
 nnoremap <leader>u :UndotreeToggle<cr>
@@ -234,7 +265,7 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 :let g:session_autosave = 'no'
 
 " Notes Directory
-:let g:notes_directories = ['~/code/golang-notes/', '~/code/personal/notes']
+:let g:notes_directories = ['~/code/notes']
 
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
