@@ -26,7 +26,11 @@ export HISTCONTROL=ignoreboth
 export HISTTIMEFORMAT="%m/%d/%y %T "
 
 # Yubikey-Agent requirement on mac os.
-export SSH_AUTH_SOCK="/usr/local/var/run/yubikey-agent.sock"
+# export SSH_AUTH_SOCK="/usr/local/var/run/yubikey-agent.sock"
+# Use gpg-agent for ssh
+gpg-connect-agent updatestartuptty /bye
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 # Connect to vpn
 export OVPN_DIR=${HOME}/.ovpn
