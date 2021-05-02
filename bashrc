@@ -45,3 +45,5 @@ export PATH="$PATH:/usr/local/opt/ruby/bin:$/usr/local/sbin"
 # Reload Yubikey
 alias reload_yubikey='gpg-connect-agent "scd serialno" "learn --force" /bye'
 alias refresh_shell="exec $SHELL -l"
+
+alias grr="grep -r --exclude-dir=.git"
