@@ -21,7 +21,7 @@ export GPG_TTY=$(tty)
 
 # Bash history 
 # Ignore dups and ignore starting with space
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
 # Show date/time in bash history
 export HISTTIMEFORMAT="%m/%d/%y %T "
 
