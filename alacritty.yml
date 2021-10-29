@@ -1,5 +1,11 @@
 font:
-  size: 18.0
+  normal:
+    family: Source Code Pro for Powerline
+    style: Regular
+  bold:
+    family: Source Code Pro for Powerline
+    style: Bold
+  size: 14.0
   window:
     startup_mode: SimpleFullscreen
 
