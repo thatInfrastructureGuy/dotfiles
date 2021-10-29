@@ -22,6 +22,10 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
+" See context when scrolling up/down right/left
+set scrolloff=7
+set sidescrolloff=7
+
 " Navigating the split screens
 " Normal Mode
 nnoremap <C-J> <C-W><C-J>
