@@ -10,6 +10,9 @@ set relativenumber
 set splitbelow
 set splitright
 
+" Get contents of all vim registers
+let @r = 'o- 0 -€ýa"0po- 1 -€ýa"1po- 2 -€ýa"2po- 3 -€ýa"3po- 4 -€ýa"4po- 5 -€ýa"5po- 6 -€ýa"6po- 7 -€ýa"7po- 8 -€ýa"8po- 9 -€ýa"9p'
+
 " Set terminal window size
 set termwinsize=10x0
 
@@ -183,6 +186,9 @@ call plug#begin()
 " Golang Plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" General Syntax Highlighting
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
 " Session Management Plugins
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -196,15 +202,22 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 
-" Search
-Plug 'kien/ctrlp.vim'
+" Change surronding paranthesis/brackets/tags etc
+Plug 'tpope/vim-surround'
 
 "Git Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Note Taking
-Plug 'xolox/vim-notes'
+" Vim Wiki
+Plug 'vimwiki/vimwiki'
+Plug 'michal-h21/vimwiki-sync'
+
+" Zettlekasten builds on vimwiki
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'michal-h21/vim-zettel'
+
 " Add License
 Plug 'antoyo/vim-licenses'
 
@@ -221,6 +234,13 @@ Plug 'preservim/nerdcommenter'
 "Interact with tmux
 Plug 'preservim/vimux'
 call plug#end()
+
+" Set Markdown for VimWiki
+let g:vimwiki_list = [{'path': '~/notes/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" See https://github.com/michal-h21/vimwiki-sync#taskwiki-support
+let g:sync_taskwarrior = 0
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -267,9 +287,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 "Vim Session Manager
 :let g:session_command_aliases = 1
 :let g:session_autosave = 'no'
-
-" Notes Directory
-:let g:notes_directories = ['~/code/notes']
 
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
