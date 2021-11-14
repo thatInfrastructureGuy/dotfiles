@@ -26,8 +26,8 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " See context when scrolling up/down right/left
-set scrolloff=7
-set sidescrolloff=7
+set scrolloff=9999
+set sidescrolloff=9999
 
 " Navigating the split screens
 " Normal Mode
@@ -211,7 +211,9 @@ Plug 'airblade/vim-gitgutter'
 
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
+Plug 'jamessan/vim-gnupg'
 Plug 'michal-h21/vimwiki-sync'
+Plug 'mattn/calendar-vim'
 
 " Zettlekasten builds on vimwiki
 Plug 'junegunn/fzf'
@@ -236,8 +238,19 @@ Plug 'preservim/vimux'
 call plug#end()
 
 " Set Markdown for VimWiki
-let g:vimwiki_list = [{'path': '~/notes/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/code/notes/',
+                      \ 'syntax': 'markdown', 'ext': '.wiki'}]
+
+" Encrypt files for VimWiki
+let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.wiki\)\='
+
+" Diary
+command! Diary VimwikiDiaryIndex
+augroup vimwikigroup
+    autocmd!
+    " automatically update links on read diary
+    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
 
 " See https://github.com/michal-h21/vimwiki-sync#taskwiki-support
 let g:sync_taskwarrior = 0
@@ -262,6 +275,7 @@ if has("persistent_undo")
 endif
 
 " Custom Colors Settings
+set termguicolors
 let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
@@ -291,10 +305,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
 
-" ctrl-p
-let g:ctrlp_regexp = 1
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:netrw_dirhistmax=0
 let g:netrw_liststyle=3
 
@@ -303,6 +313,10 @@ let g:netrw_liststyle=3
 nno <silent> [of :<c-u>call <sid>open_folds('enable')<cr>
 nno <silent> ]of :<c-u>call <sid>open_folds('disable')<cr>
 nno <silent> cof :<c-u>call <sid>open_folds(<sid>open_folds('is_active') ? 'disable' : 'enable')<cr>
+
+" FzF mapping
+nnoremap <C-f> :Files<Cr>
+nnoremap <C-g> :Rg<Cr>
 
 fu! s:open_folds(action) abort
     if a:action ==# 'is_active'

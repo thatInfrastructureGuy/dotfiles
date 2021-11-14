@@ -11,6 +11,10 @@ font:
   size: 14.0
 
 window:
+  dynamic_padding: true
+  padding:
+    x: 3
+    y: 3
   startup_mode: SimpleFullscreen
 
 # Colors (Gotham)

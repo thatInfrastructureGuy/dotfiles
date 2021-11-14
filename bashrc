@@ -56,3 +56,9 @@ alias grr="grep -r --exclude-dir=.git"
 
 # https://ohmyposh.dev
 eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"
+
+# Jump: https://github.com/gsamokovarov/jump
+eval "$(jump shell)"
+
+# RipGrep
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
