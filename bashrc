@@ -53,6 +53,7 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 alias tt="docker container run -v ${HOME}/timetrace/:/data --rm -it -e TZ=America/Los_Angeles dominikbraun/timetrace"
 alias t="dstask"
 alias grr="grep -r --exclude-dir=.git"
+alias pet="pet --config ~/code/dotfiles/pet/config.toml"
 
 # https://ohmyposh.dev
 eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"

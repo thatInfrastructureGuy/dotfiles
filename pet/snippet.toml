@@ -1,0 +1,49 @@
+[[snippets]]
+  description = "Create a .keep file in all empty directories"
+  command = "find . -type d -empty -print0 | xargs -0 -I % touch %/.keep"
+  output = ""
+
+[[snippets]]
+  description = "Display all listen port"
+  command = "lsof -Pan -i tcp -i udp"
+  output = ""
+
+[[snippets]]
+  description = "Process with the largest memory usage"
+  command = "ps aux | sort -nrk +4 | head -n 1"
+  output = ""
+
+[[snippets]]
+  description = "Top 10 IP address with the number of occurrences"
+  command = "tail -10000 access_log | cut -f 1 -d ' ' | sort | uniq -c | sort -nr | head -10"
+  output = ""
+
+[[snippets]]
+  description = "All file rename (01.txt -> 01.md)"
+  command = "ls | sed -e s/\\.txt// | awk '{print  .txt   .md}' | xargs -n 2 mv"
+  output = ""
+
+[[snippets]]
+  description = "Descending order of line length"
+  command = "awk '{print length($0), $0}' sample.txt | sort -nr | head"
+  output = ""
+
+[[snippets]]
+  description = "Check expiration date of SSL certficate"
+  command = "echo | openssl s_client -connect example.com:443 2> /dev/null | openssl x509 -dates -noout"
+  output = ""
+
+[[snippets]]
+  description = "Get my global IP address"
+  command = "curl ifconfig.co"
+  output = ""
+
+[[snippets]]
+  description = "terraform fmt"
+  command = "terraform fmt -recursive ."
+  output = ""
+
+[[snippets]]
+  description = "ecr docker login"
+  command = "aws ecr get-login-password | docker login --username AWS --password-stdin 426667588875.dkr.ecr.us-west-2.amazonaws.com"
+  output = ""

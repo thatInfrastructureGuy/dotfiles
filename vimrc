@@ -235,6 +235,9 @@ Plug 'preservim/nerdcommenter'
 
 "Interact with tmux
 Plug 'preservim/vimux'
+
+"Jsonnet
+Plug 'google/vim-jsonnet'
 call plug#end()
 
 " Set Markdown for VimWiki
