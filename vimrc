@@ -324,7 +324,7 @@ nnoremap <C-g> :Rg<Cr>
 " Vim encrypt text blocks with gpg.
 " gpg.conf is pointing to default "self" recipient
 vnoremap <leader>e :'<,'>!gpg -ae<CR>
-vnoremap <leader>d :'<,'>!gpg -dq<CR>
+vnoremap <leader>d :'<,'>!gpg -dq<CR><bar>:redraw!<CR>
 
 fu! s:open_folds(action) abort
     if a:action ==# 'is_active'
