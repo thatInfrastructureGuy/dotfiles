@@ -321,6 +321,11 @@ nno <silent> cof :<c-u>call <sid>open_folds(<sid>open_folds('is_active') ? 'disa
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 
+" Vim encrypt text blocks with gpg.
+" gpg.conf is pointing to default "self" recipient
+vnoremap <leader>e :'<,'>!gpg -ae<CR>
+vnoremap <leader>d :'<,'>!gpg -dq<CR>
+
 fu! s:open_folds(action) abort
     if a:action ==# 'is_active'
         return exists('s:open_folds')
