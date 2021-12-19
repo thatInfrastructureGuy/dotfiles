@@ -1,0 +1,12 @@
+httpstat
+kubeval
+timetrace
+ohmyposh
+dstask
+go install github.com/wakatara/harsh@latest
+go install github.com/gsamokovarov/jump@latest
+go install github.com/knqyf263/utern@latest
+
+# Brew installs
+brew install ripgrep
+

@@ -10,8 +10,7 @@ set relativenumber
 set splitbelow
 set splitright
 
-" Get contents of all vim registers
-let @r = 'o- 0 -€ýa"0po- 1 -€ýa"1po- 2 -€ýa"2po- 3 -€ýa"3po- 4 -€ýa"4po- 5 -€ýa"5po- 6 -€ýa"6po- 7 -€ýa"7po- 8 -€ýa"8po- 9 -€ýa"9p'
+" Get contents of all vim registers use ':registers'
 
 " Set terminal window size
 set termwinsize=10x0
@@ -89,12 +88,12 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Mac bindings
-nnoremap âˆ† :m .+1<CR>==
-nnoremap Ëš :m .-2<CR>==
-inoremap âˆ† <Esc>:m .+1<CR>==gi
-inoremap Ëš <Esc>:m .-2<CR>==gi
-vnoremap âˆ† :m '>+1<CR>gv=gv
-vnoremap Ëš :m '<-2<CR>gv=gv
+nnoremap Ã¢ÂˆÂ† :m .+1<CR>==
+nnoremap Ã‹Âš :m .-2<CR>==
+inoremap Ã¢ÂˆÂ† <Esc>:m .+1<CR>==gi
+inoremap Ã‹Âš <Esc>:m .-2<CR>==gi
+vnoremap Ã¢ÂˆÂ† :m '>+1<CR>gv=gv
+vnoremap Ã‹Âš :m '<-2<CR>gv=gv
 
 " Inbuilt fuzzy search
 set path+=**
@@ -209,9 +208,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
-Plug 'jamessan/vim-gnupg'
 Plug 'michal-h21/vimwiki-sync'
 Plug 'mattn/calendar-vim'
 
@@ -240,20 +242,32 @@ Plug 'preservim/vimux'
 Plug 'google/vim-jsonnet'
 call plug#end()
 
+" Markdown - Disable folds
+let g:vim_markdown_folding_disabled = 1
+
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/code/notes/',
-                      \ 'syntax': 'markdown', 'ext': '.wiki'}]
-
-" Encrypt files for VimWiki
-let g:GPGFilePattern = '*.\(gpg\|asc\|pgp\)\(.wiki\)\='
+                      \ 'syntax': 'markdown', 'ext': '.md',
+                      \ 'auto_tags': 1, 'auto_toc': 1
+                      \ }]
+let g:vimwiki_use_mouse = 1
+let g:vimwiki_auto_chdir = 1
+autocmd FileType vimwiki setlocal syntax=markdown
 
 " Diary
 command! Diary VimwikiDiaryIndex
 augroup vimwikigroup
     autocmd!
     " automatically update links on read diary
-    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+    autocmd BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
 augroup end
+
+" vim-zettel
+let g:zettel_format = "%y%m%d-%H%M-%file_no-%title"
+let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/code/dotfiles/vim-zettel.tpl"}]
+let g:zettel_fzf_command = "rg --column --line-number --ignore-case "
+     \ "--no-heading --color=always "
+nnoremap <leader>zn :ZettelNew<space>
 
 " See https://github.com/michal-h21/vimwiki-sync#taskwiki-support
 let g:sync_taskwarrior = 0
@@ -311,47 +325,11 @@ set completeopt+=menuone,noselect,noinsert
 let g:netrw_dirhistmax=0
 let g:netrw_liststyle=3
 
-" Folding
-" Use [of, ]of, cof to enable/disable/toggle the automatic closing/opening of folds
-nno <silent> [of :<c-u>call <sid>open_folds('enable')<cr>
-nno <silent> ]of :<c-u>call <sid>open_folds('disable')<cr>
-nno <silent> cof :<c-u>call <sid>open_folds(<sid>open_folds('is_active') ? 'disable' : 'enable')<cr>
-
 " FzF mapping
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 
 " Vim encrypt text blocks with gpg.
 " gpg.conf is pointing to default "self" recipient
-vnoremap <leader>e :'<,'>!gpg -ae<CR>
-vnoremap <leader>d :'<,'>!gpg -dq<CR><bar>:redraw!<CR>
-
-fu! s:open_folds(action) abort
-    if a:action ==# 'is_active'
-        return exists('s:open_folds')
-    elseif a:action ==# 'enable' && !exists('s:open_folds')
-        let s:open_folds = {
-        \                    'close'   : &foldclose,
-        \                    'column'  : &foldcolumn,
-        \                    'enable'  : &foldenable,
-        \                    'level'   : &foldlevel,
-        \                    'method'  : &foldmethod,
-        \                    'nestmax' : &foldnestmax,
-        \                    'open'    : &foldopen,
-        \                  }
-        set foldclose=all
-        set foldcolumn=1
-        set foldenable
-        set foldlevel=0
-        set foldmethod=syntax
-        set foldnestmax=1
-        set foldopen=all
-        echo '[auto open folds] ON'
-    elseif a:action ==# 'disable' && exists('s:open_folds')
-        for op in keys(s:open_folds)
-            exe 'let &fold'.op.' = s:open_folds.'.op
-        endfor
-        unlet! s:open_folds
-        echo '[auto open folds] OFF'
-    endif
-endfu
+xnoremap <leader>e :!gpg --encrypt --armor --recipient thatInfrastructureGuy@gmail.com<CR>
+xnoremap <leader>d :!gpg -dq<CR><bar>:redraw!<CR> 
