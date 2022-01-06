@@ -3,10 +3,11 @@ kubeval
 timetrace
 ohmyposh
 dstask
+pet - do not remember commands. Just bookmark it.
 go install github.com/wakatara/harsh@latest
 go install github.com/gsamokovarov/jump@latest
 go install github.com/knqyf263/utern@latest
+glow - markdown display in terminal
 
 # Brew installs
 brew install ripgrep
-

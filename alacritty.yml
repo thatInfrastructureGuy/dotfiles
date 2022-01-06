@@ -8,14 +8,14 @@ font:
   bold:
     family: Source Code Pro for Powerline
     style: Bold
-  size: 14.0
+  size: 18.0
 
 window:
   dynamic_padding: true
   padding:
     x: 3
     y: 3
-  startup_mode: SimpleFullscreen
+      #startup_mode: SimpleFullscreen
 
 # Colors (Gotham)
 colors:

@@ -1,8 +1,6 @@
 # %title
-                    
+
 # Backlinks
 %backlink
-
 ----
-
 %footer

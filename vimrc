@@ -25,8 +25,8 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " See context when scrolling up/down right/left
-set scrolloff=9999
-set sidescrolloff=9999
+" set scrolloff=9999
+" set sidescrolloff=9999
 
 " Navigating the split screens
 " Normal Mode
@@ -248,7 +248,8 @@ let g:vim_markdown_folding_disabled = 1
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/code/notes/',
                       \ 'syntax': 'markdown', 'ext': '.md',
-                      \ 'auto_tags': 1, 'auto_toc': 1
+                      \ 'auto_tags': 1, 'auto_toc': 1,
+                      \ 'links_space_char': '_'
                       \ }]
 let g:vimwiki_use_mouse = 1
 let g:vimwiki_auto_chdir = 1
@@ -264,10 +265,15 @@ augroup end
 
 " vim-zettel
 let g:zettel_format = "%y%m%d-%H%M-%file_no-%title"
-let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/code/dotfiles/vim-zettel.tpl"}]
+let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/code/dotfiles/vim/zettel.tpl"}]
 let g:zettel_fzf_command = "rg --column --line-number --ignore-case "
      \ "--no-heading --color=always "
 nnoremap <leader>zn :ZettelNew<space>
+nnoremap <leader>vt :VimwikiSearchTags<space>
+nnoremap <leader>vs :VimwikiSearch<space>
+nnoremap <leader>zs :ZettelSearch<cr>
+nnoremap <leader>bl :VimwikiBacklinks<cr>
+nnoremap <leader>gt :VimwikiRebuildTags!<cr>:VimwikiIndex<cr>:%d<cr>:ZettelGenerateTags<cr>:w<cr>
 
 " See https://github.com/michal-h21/vimwiki-sync#taskwiki-support
 let g:sync_taskwarrior = 0
