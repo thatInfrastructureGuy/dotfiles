@@ -45,5 +45,5 @@
 
 [[snippets]]
   description = "ecr docker login"
-  command = "aws ecr get-login-password | docker login --username AWS --password-stdin 426667588875.dkr.ecr.us-west-2.amazonaws.com"
+  command = "aws ecr get-login-password | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.$(aws configure get region).amazonaws.com"
   output = ""
