@@ -47,3 +47,8 @@
   description = "ecr docker login"
   command = "aws ecr get-login-password | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.$(aws configure get region --profile=$AWS_PROFILE).amazonaws.com"
   output = ""
+
+[[snippets]]
+  description = "Get Hashicorp vault secrets using cURL"
+  command = "curl -s -X GET -H \"X-Vault-Token:<VAULT_TOKEN=$VAULT_TOKEN>\" <VAULT_ADDR=$VAULT_ADDR>/v1/<ENGINE>/data/<SECRET_PATH> | jq ."
+  output = ""

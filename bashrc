@@ -9,6 +9,7 @@ export TERM="xterm-256color"
 #source <(kubectl completion bash)
 export KUBE_EDITOR=vim
 alias k='kubectl --namespace'
+ [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 source <(kubectl completion bash)
 
 # Golang path setup
@@ -21,6 +22,10 @@ export PATH=$PATH:$GOBIN
 export GPG_TTY=$(tty)
 
 # Bash history 
+## append to history. Dont overwrite
+shopt -s histappend
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 # Ignore dups and ignore starting with space
 export HISTCONTROL=ignoreboth:erasedups
 # Show date/time in bash history
@@ -55,6 +60,11 @@ alias t="dstask"
 alias grr="grep -r --exclude-dir=.git"
 alias pet="pet --config ~/code/dotfiles/pet/config.toml"
 
+function prev() {
+  PREV=$(echo `history | tail -n2 | head -n1` | cut -d' ' -f4-)
+  sh -c "pet --config ~/code/dotfiles/pet/config.toml new `printf %q "$PREV"`"
+}
+
 # https://ohmyposh.dev
 eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"
 
@@ -63,3 +73,9 @@ eval "$(jump shell)"
 
 # RipGrep
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+#function parse_git_branch() {
+#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+#}
+#
+#export PS1="\[\e[32m\]\w \[\e[91m\]\$(parse_git_branch 2>/dev/null)\[\e[00m\]$ "
