@@ -1,73 +1,72 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "Output": "",
   "blocks": [
     {
-      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "type": "root",
-          "style": "plain",
           "foreground": "#E06C75",
           "properties": {
             "root_icon": "root",
-            "prefix": "",
-            "postfix": " <#ffffff>in</> "
-          }
+            "template": "\uf0e7 <#ffffff>in</> "
+          },
+          "style": "plain",
+          "type": "root"
         },
         {
-          "type": "path",
-          "style": "plain",
           "foreground": "#55B9C4",
           "properties": {
             "style": "folder",
-            "prefix": ""
-          }
+            "template": "{{ .Path }} "
+          },
+          "style": "plain",
+          "type": "path"
         },
         {
-          "type": "git",
-          "style": "plain",
           "foreground": "#C678DD",
           "properties": {
-            "prefix": "<#ffffff>on</> ",
-            "display_status": true
-          }
+            "fetch_status": true,
+            "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} "
+          },
+          "style": "plain",
+          "type": "git"
         },
         {
-          "type": "node",
-          "style": "plain",
           "foreground": "#98C379",
           "properties": {
-            "display_version": true,
-            "prefix": "<#ffffff>via</> \uE781 "
-          }
+            "fetch_version": true,
+            "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
+          },
+          "style": "plain",
+          "type": "node"
         },
         {
-          "type": "exit",
-          "style": "plain",
           "foreground": "#C94A16",
           "properties": {
-            "prefix": "x",
-            "display_exit_code": false
-          }
+            "template": "x{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} "
+          },
+          "style": "plain",
+          "type": "exit"
         }
-      ]
+      ],
+      "type": "prompt"
     },
     {
-      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
         {
-          "type": "text",
-          "style": "plain",
           "foreground": "#63F08C",
           "properties": {
-            "prefix": "",
-            "text": "\u279C"
-          }
+            "template": "\u279c "
+          },
+          "style": "plain",
+          "type": "text"
         }
-      ]
+      ],
+      "type": "prompt"
     }
-  ]
+  ],
+  "version": 1
 }

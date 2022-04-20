@@ -1,7 +1,6 @@
 let mapleader = (',')
 syntax enable
 filetype plugin indent on
-
 " Line Numbers
 set number
 set relativenumber
@@ -10,13 +9,14 @@ set relativenumber
 set splitbelow
 set splitright
 
-" Get contents of all vim registers use ':registers'
+" Set highlighted search
+set hlsearch
+
+" Show count of matching words
+set shortmess-=S
 
 " Set terminal window size
 set termwinsize=10x0
-
-" Set highlighted search
-set hlsearch
 
 " Change how vim represents characters on the screen
 set encoding=utf-8
@@ -78,7 +78,7 @@ inoremap <C-Right> :tabnext<CR>
 inoremap <C-Down> :tabprevious<CR>
 inoremap <C-Up> :tabnext<CR>
 
-" Move lines up down with Alt+k and Alt+j 
+" Move lines up down with Alt+k and Alt+j
 " Linux bindings
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -97,7 +97,7 @@ vnoremap Ë :m '<-2<CR>gv=gv
 
 " Inbuilt fuzzy search
 set path+=**
-set wildmenu 
+set wildmenu
 
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -125,6 +125,10 @@ set nocompatible
 set nobackup
 set nowritebackup
 set noswapfile
+
+" Hyphen is part of word. Useful for diw/ciw
+" Should appear after set nocompatible
+set iskeyword=@,48-57,_,192-255,#,-
 
 set mouse=a
 
@@ -214,7 +218,7 @@ Plug 'plasticboy/vim-markdown'
 
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
-Plug 'michal-h21/vimwiki-sync'
+"Plug 'michal-h21/vimwiki-sync'
 Plug 'mattn/calendar-vim'
 
 " Zettlekasten builds on vimwiki
@@ -238,8 +242,19 @@ Plug 'preservim/nerdcommenter'
 "Interact with tmux
 Plug 'preservim/vimux'
 
-"Jsonnet
-Plug 'google/vim-jsonnet'
+" YouCompleteMe for python support
+"Plug 'ycm-core/YouCompleteMe'
+
+" ALE: Check syntax in Vim asynchronously and fix files
+"Plug 'dense-analysis/ale'
+
+Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'jparise/vim-graphql'        " GraphQL syntax
+Plug 'google/vim-jsonnet'         " Jsonnet syntax
+Plug 'hashivim/vim-terraform'     " Terraform syntax
+
 call plug#end()
 
 " Markdown - Disable folds
@@ -287,7 +302,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 " UndoTree Toggle
@@ -320,6 +335,7 @@ let g:licenses_authors_name='Ashish Kulkarni'
 map <C-n> :NERDTreeToggle<CR>
 " NerdTree bug: Remove ^G from view
 let g:NERDTreeNodeDelimiter = "\u00a0"
+let NERDTreeShowHidden=1
 
 "Vim Session Manager
 :let g:session_command_aliases = 1
@@ -332,10 +348,30 @@ let g:netrw_dirhistmax=0
 let g:netrw_liststyle=3
 
 " FzF mapping
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --ignore-case --stats --line-number --no-heading --color=always --hidden --smart-case -g '!{**/node_modules/*,**/.git/*,vendor}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 
 " Vim encrypt text blocks with gpg.
 " gpg.conf is pointing to default "self" recipient
 xnoremap <leader>e :!gpg --encrypt --armor --recipient thatInfrastructureGuy@gmail.com<CR>
-xnoremap <leader>d :!gpg -dq<CR><bar>:redraw!<CR> 
+xnoremap <leader>d :!gpg -dq<CR><bar>:redraw!<CR>
+
+" Search for visually selected text using //
+" https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" YouCompleteMe: Installed for Python support
+"let g:ycm_autoclose_preview_window_after_completion=1
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" ALE config
+" Check ftplugin for language specific plugins
+"let g:ale_fixers = {
+"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\}
+"let g:ale_fix_on_save = 1
+"" Enable completion where available.
+"" You should not turn this setting on if you wish to use ALE as a completion
+"" source for other completion plugins, like Deoplete.
+"let g:ale_completion_enabled = 1

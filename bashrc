@@ -1,7 +1,7 @@
 alias ls='ls -GF'
 cd() { builtin cd "$@" && pwd && ls; };
 
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export TERM="xterm-256color"
 
@@ -21,7 +21,7 @@ export PATH=$PATH:$GOBIN
 # GPG commit password tty
 export GPG_TTY=$(tty)
 
-# Bash history 
+# Bash history
 ## append to history. Dont overwrite
 shopt -s histappend
 export HISTSIZE=1000
@@ -79,3 +79,8 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 #}
 #
 #export PS1="\[\e[32m\]\w \[\e[91m\]\$(parse_git_branch 2>/dev/null)\[\e[00m\]$ "
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"

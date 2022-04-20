@@ -8,7 +8,7 @@ font:
   bold:
     family: Source Code Pro for Powerline
     style: Bold
-  size: 14.0
+  size: 16.0
 
 window:
   dynamic_padding: true
