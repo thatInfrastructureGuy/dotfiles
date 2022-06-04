@@ -52,3 +52,8 @@
   description = "Get Hashicorp vault secrets using cURL"
   command = "curl -s -X GET -H \"X-Vault-Token:<VAULT_TOKEN=$VAULT_TOKEN>\" <VAULT_ADDR=$VAULT_ADDR>/v1/<ENGINE>/data/<SECRET_PATH> | jq ."
   output = ""
+
+[[snippets]]
+  description = "Flush OSX Mac DNS Cache"
+  command = "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
+  output = ""

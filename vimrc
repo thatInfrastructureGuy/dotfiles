@@ -206,14 +206,19 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 
 " Change surronding paranthesis/brackets/tags etc
+" try typing ds', cs'"
 Plug 'tpope/vim-surround'
 
 "Git Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Markdown
+" Format lines in various ways. 
+" Enables tabular formating. See :h tabular
 Plug 'godlygeek/tabular'
+
+" Markdown
+" Syntax highlighting, folding, concealing.
 Plug 'plasticboy/vim-markdown'
 
 " Vim Wiki
@@ -237,9 +242,12 @@ Plug 'fatih/molokai'
 Plug 'mbbill/undotree'
 
 "Comment Toggle
+" try <leader>cc , <leader>c$, <leader>cA, (toggle = <leader>c<space>)
 Plug 'preservim/nerdcommenter'
 
 "Interact with tmux
+" Send commands to tmux from Vim. Focus is still in Vim. 
+" We can continue working until the command returns
 Plug 'preservim/vimux'
 
 " YouCompleteMe for python support
@@ -338,7 +346,6 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let NERDTreeShowHidden=1
 
 "Vim Session Manager
-:let g:session_command_aliases = 1
 :let g:session_autosave = 'no'
 
 " Autocomplete prompt whenever you press the dot (.)
@@ -360,6 +367,13 @@ xnoremap <leader>d :!gpg -dq<CR><bar>:redraw!<CR>
 " Search for visually selected text using //
 " https://vim.fandom.com/wiki/Search_for_visually_selected_text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" Gopass vim credential leakage fix
+" https://github.com/gopasspw/gopass/blob/master/docs/setup.md#securing-your-editor
+" Linux
+au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
+" Mac
+au BufNewFile,BufRead /private/**/gopass** setlocal noswapfile nobackup noundofile
 
 " YouCompleteMe: Installed for Python support
 "let g:ycm_autoclose_preview_window_after_completion=1
