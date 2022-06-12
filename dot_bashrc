@@ -1,4 +1,10 @@
 alias ls='ls -GF'
+alias ll='ls -alGF'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 cd() { builtin cd "$@" && pwd && ls; };
 
 export LC_ALL=en_US.UTF-8
@@ -30,6 +36,10 @@ export HISTFILESIZE=2000
 export HISTCONTROL=ignoreboth:erasedups
 # Show date/time in bash history
 export HISTTIMEFORMAT="%m/%d/%y %T "
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
 # Connect to vpn
 export OVPN_DIR=${HOME}/.ovpn
