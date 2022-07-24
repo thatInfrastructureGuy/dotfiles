@@ -223,7 +223,7 @@ Plug 'plasticboy/vim-markdown'
 
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
-"Plug 'michal-h21/vimwiki-sync'
+Plug 'michal-h21/vimwiki-sync'
 Plug 'mattn/calendar-vim'
 
 " Zettlekasten builds on vimwiki
@@ -335,7 +335,7 @@ augroup file_type
 augroup END
 
 " LicenseFile
-"command! License call InsertLicense('licenseFile')
+command! License call InsertLicense('licenseFile')
 let g:licenses_copyright_holders_name = 'Kulkarni, Ashish <thatInfrastructureGuy@gmail.com>'
 let g:licenses_authors_name='Ashish Kulkarni'
 
@@ -346,7 +346,9 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let NERDTreeShowHidden=1
 
 "Vim Session Manager
-:let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
+let g:session_autosave_periodic = 'yes'
 
 " Autocomplete prompt whenever you press the dot (.)
 set completeopt+=menuone,noselect,noinsert
