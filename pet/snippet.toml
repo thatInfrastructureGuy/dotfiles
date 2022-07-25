@@ -57,3 +57,8 @@
   description = "Flush OSX Mac DNS Cache"
   command = "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
   output = ""
+
+[[snippets]]
+  description = "git remote rebase"
+  command = "git fetch --all --prune --prune-tags && git rebase"
+  output = ""
