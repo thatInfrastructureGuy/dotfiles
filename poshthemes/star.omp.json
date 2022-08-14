@@ -1,6 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "Output": "",
   "blocks": [
     {
       "alignment": "left",
@@ -8,45 +7,43 @@
         {
           "foreground": "#E06C75",
           "properties": {
-            "root_icon": "root",
-            "template": "\uf0e7 <#ffffff>in</> "
+            "root_icon": "root"
           },
           "style": "plain",
+          "template": "\uf0e7 <#ffffff>in</> ",
           "type": "root"
         },
         {
           "foreground": "#55B9C4",
           "properties": {
-            "style": "folder",
-            "template": "{{ .Path }} "
+            "style": "folder"
           },
           "style": "plain",
+          "template": "{{ .Path }} ",
           "type": "path"
         },
         {
           "foreground": "#C678DD",
           "properties": {
-            "fetch_status": true,
-            "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} "
+            "fetch_status": true
           },
           "style": "plain",
+          "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
           "type": "git"
         },
         {
           "foreground": "#98C379",
           "properties": {
-            "fetch_version": true,
-            "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
+            "fetch_version": true
           },
           "style": "plain",
+          "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "type": "node"
         },
         {
           "foreground": "#C94A16",
-          "properties": {
-            "template": "x{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} "
-          },
           "style": "plain",
+          "template": "x{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
           "type": "exit"
         }
       ],
@@ -58,15 +55,13 @@
       "segments": [
         {
           "foreground": "#63F08C",
-          "properties": {
-            "template": "\u279c "
-          },
           "style": "plain",
+          "template": "\u279c ",
           "type": "text"
         }
       ],
       "type": "prompt"
     }
   ],
-  "version": 1
+  "version": 2
 }
