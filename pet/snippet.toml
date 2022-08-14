@@ -62,3 +62,8 @@
   description = "git remote rebase"
   command = "git fetch --all --prune --prune-tags && git rebase"
   output = ""
+
+[[snippets]]
+  description = "Mount RAMDisk (Default 5Gb)"
+  command = "diskutil erasevolume HFS+ \"RAMDisk\" `hdiutil attach -nomount ram://<size=10485760>`"
+  output = ""
