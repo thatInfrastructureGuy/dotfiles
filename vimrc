@@ -131,6 +131,7 @@ set noswapfile
 set iskeyword=@,48-57,_,192-255,#,-
 
 set mouse=a
+set ff=unix
 
 " To get hover working in the terminal we need to set ttymouse. See
 "

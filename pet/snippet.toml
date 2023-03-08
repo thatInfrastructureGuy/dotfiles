@@ -67,3 +67,18 @@
   description = "Mount RAMDisk (Default 5Gb)"
   command = "diskutil erasevolume HFS+ \"RAMDisk\" `hdiutil attach -nomount ram://<size=10485760>`"
   output = ""
+
+[[snippets]]
+  description = "Decode JWT"
+  command = "jq -R 'split(\".\") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< $JWT"
+  output = ""
+
+[[snippets]]
+  description = "Git: Search Recursively"
+  command = "git log --branches -i --all -p -S \"<SEARCH_REGEX=$SEARCH_REGEX>\""
+  output = ""
+
+[[snippets]]
+  description = "Git: Get branch containing commit"
+  command = "git branch -a --contains \"<COMMIT_SHA=$COMMIT_SHA>\""
+  output = ""

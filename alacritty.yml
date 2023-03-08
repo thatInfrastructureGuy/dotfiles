@@ -3,12 +3,18 @@ env:
 
 font:
   normal:
-    family: Source Code Pro for Powerline
+    family: "Inconsolata"
     style: Regular
   bold:
-    family: Source Code Pro for Powerline
+    family: "Inconsolata"
     style: Bold
-  size: 18.0
+  italic:
+    family: "Inconsolata"
+    style: Italic
+  bold_italic:
+    family: "Inconsolata"
+    style: BoldItalic
+  size: 16.0
 
 window:
   dynamic_padding: true

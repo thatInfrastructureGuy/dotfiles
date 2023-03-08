@@ -10,7 +10,7 @@
             "root_icon": "root"
           },
           "style": "plain",
-          "template": "\uf0e7 <#ffffff>in</> ",
+          "template": " <#ffffff>in</> ",
           "type": "root"
         },
         {
@@ -28,7 +28,7 @@
             "fetch_status": true
           },
           "style": "plain",
-          "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
+          "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} ",
           "type": "git"
         },
         {
@@ -37,13 +37,37 @@
             "fetch_version": true
           },
           "style": "plain",
-          "template": "<#ffffff>via</> \ue781 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "template": "<#ffffff>via</>  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "type": "node"
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#100e23",
+          "background": "#906cff",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "aws",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#FFA400",
+          "template": "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
+        },
+        {
+          "type": "kubectl",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#000000",
+          "background": "#ebcc34",
+          "template": " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
         },
         {
           "foreground": "#C94A16",
           "style": "plain",
-          "template": "x{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
+          "template": "x{{ if gt .Code 0 }}{{ else }}{{ end }} ",
           "type": "exit"
         }
       ],
@@ -56,7 +80,7 @@
         {
           "foreground": "#63F08C",
           "style": "plain",
-          "template": "\u279c ",
+          "template": "➜ ",
           "type": "text"
         }
       ],

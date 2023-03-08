@@ -40,7 +40,7 @@ alias oConnect="ssh -q -f -N -p 22222 -D 18888 -o 'UserKnownHostsFile=/dev/null'
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH="$PATH:/usr/local/opt/ruby/bin:$/usr/local/sbin:/usr/local/opt/gnupg@2.2/bin:/usr/local/opt/libpq/bin"
+export PATH="$PATH:/usr/local/opt/ruby/bin:$/usr/local/sbin:/usr/local/opt/gnupg@2.2/bin:/usr/local/opt/libpq/bin:/usr/local/sbin"
 
 # Reload Yubikey
 alias reload_yubikey='gpg-connect-agent "scd serialno" "learn --force" /bye'
@@ -84,3 +84,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ashishkulkarni/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ashishkulkarni/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ashishkulkarni/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/ashishkulkarni/Downloads/google-cloud-sdk/completion.bash.inc'; fi
