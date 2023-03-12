@@ -52,6 +52,9 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 unset SSH_AGENT_PID
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
+# DSTASK
+export DSTASK_GIT_REPO="$HOME/.config/dstask"
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## Aliases
@@ -87,6 +90,15 @@ export NVM_DIR="$HOME/.nvm"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ashishkulkarni/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ashishkulkarni/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# launch diary from command line:
+alias diary='vim -c ":VimwikiMakeDiaryNote"'
+
+# launch index page from command line
+alias vw='vim -c ":VimwikiIndex"'
+
+# convert a file into zettel
+alias vz='vim -c ZettelCapture'
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ashishkulkarni/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/ashishkulkarni/Downloads/google-cloud-sdk/completion.bash.inc'; fi

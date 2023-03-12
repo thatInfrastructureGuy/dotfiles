@@ -28,6 +28,10 @@ set fileencoding=utf-8
 " set scrolloff=9999
 " set sidescrolloff=9999
 
+" open buffer in split screen
+nnoremap <Leader>bs :ls<CR>:sbuffer<Space>
+nnoremap <Leader>bv :ls<CR>:vertical sbuffer<Space>
+
 " Navigating the split screens
 " Normal Mode
 nnoremap <C-J> <C-W><C-J>
@@ -270,13 +274,15 @@ call plug#end()
 let g:vim_markdown_folding_disabled = 1
 
 " Set Markdown for VimWiki
-let g:vimwiki_list = [{'path': '~/code/notes/',
+let g:vimwiki_list = [{'path': '~/.config/pkm/',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'auto_tags': 1, 'auto_toc': 1,
-                      \ 'links_space_char': '_'
+                      \ 'links_space_char': '_',
+                      \ 'diary_rel_path': '.'
                       \ }]
 let g:vimwiki_use_mouse = 1
 let g:vimwiki_auto_chdir = 1
+let g:vimwiki_listsyms = '✗○◐●✓'
 autocmd FileType vimwiki setlocal syntax=markdown
 
 " Diary
@@ -292,12 +298,14 @@ let g:zettel_format = "%y%m%d-%H%M-%file_no-%title"
 let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/code/dotfiles/vim/zettel.tpl"}]
 let g:zettel_fzf_command = "rg --column --line-number --ignore-case "
      \ "--no-heading --color=always "
+
 nnoremap <leader>zn :ZettelNew<space>
-nnoremap <leader>vt :VimwikiSearchTags<space>
-nnoremap <leader>vs :VimwikiSearch<space>
 nnoremap <leader>zs :ZettelSearch<cr>
-nnoremap <leader>bl :VimwikiBacklinks<cr>
-nnoremap <leader>gt :VimwikiRebuildTags!<cr>:VimwikiIndex<cr>:%d<cr>:ZettelGenerateTags<cr>:w<cr>
+nnoremap <leader>vb :VimwikiBacklinks<cr>
+nnoremap <leader>vh :VimwikiSplitLink<cr>
+nnoremap <leader>vv :VimwikiVSplitLink<cr>
+nnoremap <leader>vt :VimwikiToggleListItem<cr>
+nnoremap <leader>gt :VimwikiRebuildTags!<cr>:VimwikiIndex<cr>:%d<cr>:ZettelGenerateTags<cr>:redraw!<cr>:w<cr>
 
 " See https://github.com/michal-h21/vimwiki-sync#taskwiki-support
 let g:sync_taskwarrior = 0
@@ -361,6 +369,7 @@ let g:netrw_liststyle=3
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --ignore-case --stats --line-number --no-heading --color=always --hidden --smart-case -g '!{**/node_modules/*,**/.git/*,vendor}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
+nnoremap <C-b> :up<cr>:Buffers<cr>
 
 " Vim encrypt text blocks with gpg.
 " gpg.conf is pointing to default "self" recipient
