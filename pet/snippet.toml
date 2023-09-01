@@ -82,3 +82,18 @@
   description = "Git: Get branch containing commit"
   command = "git branch -a --contains \"<COMMIT_SHA=$COMMIT_SHA>\""
   output = ""
+
+[[snippets]]
+  description = "Kubernetes: Clear context"
+  command = "kubectl config unset current-context"
+  output = ""
+
+[[snippets]]
+  description = "Postgres: Find long running query"
+  command = "echo \"SELECT pid,  now() - pg_stat_activity.query_start AS duration, query, state FROM pg_stat_activity WHERE (now() - pg_stat_activity.query_start) > interval '5 minutes';\""
+  output = ""
+
+[[snippets]]
+  description = "Remove ALL local branches that are not on remote"
+  command = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+  output = ""

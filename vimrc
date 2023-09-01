@@ -296,7 +296,7 @@ augroup end
 " vim-zettel
 let g:zettel_format = "%y%m%d-%H%M-%file_no-%title"
 let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/code/dotfiles/vim/zettel.tpl"}]
-let g:zettel_fzf_command = "rg --column --line-number --ignore-case "
+let g:zettel_fzf_command = "rg -L --column --line-number --ignore-case "
      \ "--no-heading --color=always "
 
 nnoremap <leader>zn :ZettelNew<space>
@@ -366,7 +366,7 @@ let g:netrw_dirhistmax=0
 let g:netrw_liststyle=3
 
 " FzF mapping
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --ignore-case --stats --line-number --no-heading --color=always --hidden --smart-case -g '!{**/node_modules/*,**/.git/*,vendor}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg -L --column --ignore-case --stats --line-number --no-heading --color=always --hidden --smart-case -g '!{**/node_modules/*,**/.git/*,vendor}' ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-g> :Rg<Cr>
 nnoremap <C-b> :up<cr>:Buffers<cr>

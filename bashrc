@@ -75,7 +75,7 @@ eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.
 eval "$(jump shell)"
 
 # RipGrep
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+export FZF_DEFAULT_COMMAND='rg -L --files --no-ignore-vcs --hidden'
 
 #function parse_git_branch() {
 #     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
