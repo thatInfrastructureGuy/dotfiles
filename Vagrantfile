@@ -66,7 +66,7 @@ Host RootVM
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /Users/ashishkulkarni/.vagrant/machines/RootVM/virtualbox/private_key
+  IdentityFile ~/.vagrant/machines/RootVM/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
 
