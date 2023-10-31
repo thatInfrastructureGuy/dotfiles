@@ -265,7 +265,7 @@ Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'google/vim-jsonnet'         " Jsonnet syntax
+Plug 'jjo/vim-cue'                " Cue Syntax
 Plug 'hashivim/vim-terraform'     " Terraform syntax
 
 call plug#end()

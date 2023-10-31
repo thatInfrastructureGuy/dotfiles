@@ -97,3 +97,13 @@
   description = "Remove ALL local branches that are not on remote"
   command = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
   output = ""
+
+[[snippets]]
+  description = "Check if remote port is open via Bash"
+  command = "timeout 5 bash -c ': < /dev/tcp/google.com/80' && echo OK || echo ERROR"
+  output = ""
+
+[[snippets]]
+  description = "Check if remote port is open via Netcat. Use -u for UDP or -t for TCP"
+  command = "nc -vztw5 google.com 80"
+  output = ""
