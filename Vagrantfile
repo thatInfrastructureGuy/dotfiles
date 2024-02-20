@@ -29,7 +29,7 @@ $provision = <<-'EOF'
 sudo apt-get update
 
 # AWS CLI
-sudo apt-get install -y unzip
+sudo apt-get install -y unzip docker-compose-plugin
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install

@@ -401,3 +401,6 @@ au BufNewFile,BufRead /private/**/gopass** setlocal noswapfile nobackup noundofi
 "" You should not turn this setting on if you wish to use ALE as a completion
 "" source for other completion plugins, like Deoplete.
 "let g:ale_completion_enabled = 1
+
+" Auto-Reload if the file on disk changes
+set autoread | au CursorHold * checktime
