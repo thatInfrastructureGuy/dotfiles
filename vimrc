@@ -272,14 +272,18 @@ call plug#end()
 
 " Markdown - Disable folds
 let g:vim_markdown_folding_disabled = 1
+let g:vimwiki_folding = ''
 
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/.config/pkm/',
+                      \ 'index': 'README',
                       \ 'syntax': 'markdown', 'ext': '.md',
                       \ 'auto_tags': 1, 'auto_toc': 1,
                       \ 'links_space_char': '_',
-                      \ 'diary_rel_path': '.'
+                      \ 'diary_rel_path': '.',
+                      \ 'list_margin': 0
                       \ }]
+let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_use_mouse = 1
 let g:vimwiki_auto_chdir = 1
 let g:vimwiki_listsyms = '✗○◐●✓'
