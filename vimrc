@@ -273,6 +273,7 @@ call plug#end()
 " Markdown - Disable folds
 let g:vim_markdown_folding_disabled = 1
 let g:vimwiki_folding = ''
+let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\@<=', 'pre_mark': '', 'post_mark': '', 'sep': '>><<'}
 
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/.config/pkm/',
@@ -408,3 +409,8 @@ au BufNewFile,BufRead /private/**/gopass** setlocal noswapfile nobackup noundofi
 
 " Auto-Reload if the file on disk changes
 set autoread | au CursorHold * checktime
+
+" Insert dates when these letters are typed. (Need space or dot or newline)
+iabbrev <expr> ddate strftime("%c")
+iabbrev <expr> ttime strftime("%H:%M")
+iabbrev <expr> ptime strftime("%l:%M %p")
