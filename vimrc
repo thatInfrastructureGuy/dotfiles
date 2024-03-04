@@ -228,13 +228,14 @@ Plug 'plasticboy/vim-markdown'
 
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
-Plug 'michal-h21/vimwiki-sync'
+"Plug 'michal-h21/vimwiki-sync'
 Plug 'mattn/calendar-vim'
 
 " Zettlekasten builds on vimwiki
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'michal-h21/vim-zettel'
+Plug 'junegunn/vim-emoji' "(CTRL-X CTRL-U)
 
 " Add License
 Plug 'antoyo/vim-licenses'
@@ -267,13 +268,13 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'jjo/vim-cue'                " Cue Syntax
 Plug 'hashivim/vim-terraform'     " Terraform syntax
-
 call plug#end()
 
 " Markdown - Disable folds
 let g:vim_markdown_folding_disabled = 1
 let g:vimwiki_folding = ''
 let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\@<=', 'pre_mark': '', 'post_mark': '', 'sep': '>><<'}
+"let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\n', 'pre_mark': ' - ', 'post_mark': '\n', 'sep': ''}
 
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/.config/pkm/',
@@ -414,3 +415,15 @@ set autoread | au CursorHold * checktime
 iabbrev <expr> ddate strftime("%c")
 iabbrev <expr> ttime strftime("%H:%M")
 iabbrev <expr> ptime strftime("%l:%M %p")
+
+"Emoji (CTRL-X CTRL-U)
+"https://github.com/junegunn/vim-emoji/issues/33#issuecomment-975106863
+set completefunc=emoji#complete
+fun! <SID>Sub_movend(lineno)
+	if (match(getline(a:lineno), ':\([^:]\+\):') != -1) " There is a match
+		exe a:lineno . 'su /:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g'
+		star!
+	endif
+endfun
+
+autocmd! CompleteDone * call <SID>Sub_movend(line('.'))
