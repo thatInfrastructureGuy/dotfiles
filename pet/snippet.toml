@@ -107,3 +107,8 @@
   description = "Check if remote port is open via Netcat. Use -u for UDP or -t for TCP"
   command = "nc -vztw5 google.com 80"
   output = ""
+
+[[snippets]]
+  description = "List all kubernetes secrets in namespace base64decoded and json output"
+  command = "kubectl get secrets -o json | jq '.items[] | {name: .metadata.name,data: .data|map_values(@base64d)}'"
+  output = ""
