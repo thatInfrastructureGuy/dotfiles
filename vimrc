@@ -228,7 +228,7 @@ Plug 'plasticboy/vim-markdown'
 
 " Vim Wiki
 Plug 'vimwiki/vimwiki'
-"Plug 'michal-h21/vimwiki-sync'
+Plug 'michal-h21/vimwiki-sync'
 Plug 'mattn/calendar-vim'
 
 " Zettlekasten builds on vimwiki
@@ -273,8 +273,7 @@ call plug#end()
 " Markdown - Disable folds
 let g:vim_markdown_folding_disabled = 1
 let g:vimwiki_folding = ''
-let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\@<=', 'pre_mark': '', 'post_mark': '', 'sep': '>><<'}
-"let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\n', 'pre_mark': ' - ', 'post_mark': '\n', 'sep': ''}
+let g:vimwiki_tag_format = {'pre': '\(^[ -]*tags\s*: .*\)\@<=', 'pre_mark': '#', 'post_mark': '', 'sep': '>><<'}
 
 " Set Markdown for VimWiki
 let g:vimwiki_list = [{'path': '~/.config/pkm/',
