@@ -28,6 +28,10 @@ set fileencoding=utf-8
 " set scrolloff=9999
 " set sidescrolloff=9999
 
+" Highlight cursor row and column
+set cursorline
+set cursorcolumn
+
 " open buffer in split screen
 nnoremap <Leader>bs :ls<CR>:sbuffer<Space>
 nnoremap <Leader>bv :ls<CR>:vertical sbuffer<Space>
