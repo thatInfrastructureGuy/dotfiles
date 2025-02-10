@@ -1,0 +1,126 @@
+######################## Basic ###################################
+## Locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+## Editor
+export EDITOR=nvim
+export KUBE_EDITOR=${EDITOR}
+##################################################################
+
+{{ if eq .chezmoi.os "darwin" -}}
+############### MAC SPECIFIC #####################################
+export BASH_SILENCE_DEPRECATION_WARNING=1
+##################################################################
+
+############### https://github.com/homebrew/brew #################
+BREW="/opt/homebrew/bin/brew"
+if command -v ${BREW} &> /dev/null
+then
+    eval "$(${BREW} shellenv)"
+else
+    echo "Homebrew does not exists!!"
+fi
+##################################################################
+{{- end }}
+
+###################### Yubikey Git ###############################
+# git settings
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+# git commit with signing
+export GPG_TTY=$(tty)
+
+# reconnect yubikey
+gpg-tty() { gpg-connect-agent updatestartuptty /bye &> /dev/null; };
+gpg-tty
+##################################################################
+
+####################### Prettify #################################
+alias ls='ls -GF'
+alias grep="grep --recursive --color --number --exclude-dir=.git"
+cd() { builtin cd "$@" && pwd && ls; };
+
+## Terminal Settings
+export TERM="xterm-256color"
+##################################################################
+
+
+######################## Kubernetes ##############################
+alias k='kubectl --namespace'
+
+if command -v kubectl &> /dev/null
+then
+    source <(kubectl completion bash)
+fi
+##################################################################
+
+######################## Golang ##################################
+export GOPATH=~/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+##################################################################
+
+####################### Bash History Tweaks ######################
+# Append to history. Dont overwrite
+shopt -s histappend
+export HISTSIZE=2000
+export HISTFILESIZE=5000
+# Ignore dups and ignore starting with space
+export HISTCONTROL=ignoreboth:erasedups
+# Show date/time in bash history
+export HISTTIMEFORMAT="%m/%d/%y %T "
+##################################################################
+
+
+############### https://github.com/naggie/dstask #################
+alias t="dstask"
+##################################################################
+
+############# https://github.com/knqyf263/pet ####################
+alias pet="pet --config ~/code/dotfiles/pet/config.toml"
+function add_to_pet() {
+  PREV=$(echo `history | tail -n2 | head -n1` | cut -d' ' -f4-)
+  sh -c "pet --config ~/code/dotfiles/pet/config.toml new `printf %q "$PREV"`"
+}
+##################################################################
+
+#################### https://ohmyposh.dev ########################
+if command -v oh-my-posh &> /dev/null
+then
+    eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"
+fi
+##################################################################
+
+############ https://github.com/gsamokovarov/jump ################
+if command -v jump &> /dev/null
+then
+    eval "$(jump shell)"
+fi
+##################################################################
+
+############### https://github.com/junegunn/fzf ##################
+if command -v fzf &> /dev/null
+then
+    eval "$(fzf --bash)"
+fi
+##################################################################
+
+############# https://github.com/BurntSushi/ripgrep ##############
+if command -v rg &> /dev/null
+then
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+fi
+##################################################################
+
+############# https://github.com/vimwiki/vimwiki #################
+# launch diary from command line:
+alias diary='${EDITOR} -c ":VimwikiMakeDiaryNote"'
+
+# launch index page from command line
+alias vw='${EDITOR} -c ":VimwikiIndex"'
+
+# convert a file into zettel
+alias vz='${EDITOR} -c ZettelCapture'
+##################################################################
