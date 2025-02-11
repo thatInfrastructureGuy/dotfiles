@@ -14,8 +14,8 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 ## Important: XDG Environment variables are not set as they
 ## differ from linux. See: https://pkg.go.dev/os#UserCacheDir
-## XDG_CACHE_HOME = $HOME/Library/Caches
-## XDG_CONFIG_HOME = $HOME/Library/Application Support
+export XDG_CACHE_HOME="$HOME/Library/Caches"
+export XDG_CONFIG_HOME="$HOME/Library/Application Support"
 
 ##################################################################
 {{- end }}
