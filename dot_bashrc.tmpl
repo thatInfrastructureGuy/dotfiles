@@ -11,18 +11,32 @@ export KUBE_EDITOR=${EDITOR}
 {{ if eq .chezmoi.os "darwin" -}}
 ############### MAC SPECIFIC #####################################
 export BASH_SILENCE_DEPRECATION_WARNING=1
-##################################################################
 
-############### https://github.com/homebrew/brew #################
-BREW="/opt/homebrew/bin/brew"
-if command -v ${BREW} &> /dev/null
-then
-    eval "$(${BREW} shellenv)"
-else
-    echo "Homebrew does not exists!!"
-fi
+## Important: XDG Environment variables are not set as they
+## differ from linux. See: https://pkg.go.dev/os#UserCacheDir
+## XDG_CACHE_HOME = $HOME/Library/Caches
+## XDG_CONFIG_HOME = $HOME/Library/Application Support
+
 ##################################################################
 {{- end }}
+
+############### https://github.com/homebrew/brew #################
+# Based on https://docs.brew.sh/Installation
+
+{{ if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") -}}
+BREW_PREFIX="/opt/homebrew"
+{{ else if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "amd64") -}}
+BREW_PREFIX="/usr/local"
+{{ else if eq .chezmoi.os "linux" -}}
+BREW_PREFIX="/home/linuxbrew/.linuxbrew"
+{{- end }}
+
+BREW="${BREW_PREFIX}/bin/brew"
+if command -V ${BREW} > /dev/null
+then
+    eval "$(${BREW} shellenv)"
+fi
+##################################################################
 
 ###################### Yubikey Git ###############################
 # git settings
@@ -50,7 +64,7 @@ export TERM="xterm-256color"
 ######################## Kubernetes ##############################
 alias k='kubectl --namespace'
 
-if command -v kubectl &> /dev/null
+if command -V kubectl > /dev/null
 then
     source <(kubectl completion bash)
 fi
@@ -87,28 +101,28 @@ function add_to_pet() {
 ##################################################################
 
 #################### https://ohmyposh.dev ########################
-if command -v oh-my-posh &> /dev/null
+if command -V oh-my-posh > /dev/null
 then
     eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"
 fi
 ##################################################################
 
 ############ https://github.com/gsamokovarov/jump ################
-if command -v jump &> /dev/null
+if command -V jump > /dev/null
 then
     eval "$(jump shell)"
 fi
 ##################################################################
 
 ############### https://github.com/junegunn/fzf ##################
-if command -v fzf &> /dev/null
+if command -V fzf > /dev/null
 then
     eval "$(fzf --bash)"
 fi
 ##################################################################
 
 ############# https://github.com/BurntSushi/ripgrep ##############
-if command -v rg &> /dev/null
+if command -V rg > /dev/null
 then
     export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 fi
