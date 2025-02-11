@@ -1,0 +1,114 @@
+[[snippets]]
+  description = "Create a .keep file in all empty directories"
+  command = "find . -type d -empty -print0 | xargs -0 -I % touch %/.keep"
+  output = ""
+
+[[snippets]]
+  description = "Display all listen port"
+  command = "lsof -Pan -i tcp -i udp"
+  output = ""
+
+[[snippets]]
+  description = "Process with the largest memory usage"
+  command = "ps aux | sort -nrk +4 | head -n 1"
+  output = ""
+
+[[snippets]]
+  description = "Top 10 IP address with the number of occurrences"
+  command = "tail -10000 access_log | cut -f 1 -d ' ' | sort | uniq -c | sort -nr | head -10"
+  output = ""
+
+[[snippets]]
+  description = "All file rename (01.txt -> 01.md)"
+  command = "ls | sed -e s/\\.txt// | awk '{print  .txt   .md}' | xargs -n 2 mv"
+  output = ""
+
+[[snippets]]
+  description = "Descending order of line length"
+  command = "awk '{print length($0), $0}' sample.txt | sort -nr | head"
+  output = ""
+
+[[snippets]]
+  description = "Check expiration date of SSL certficate"
+  command = "echo | openssl s_client -connect example.com:443 2> /dev/null | openssl x509 -dates -noout"
+  output = ""
+
+[[snippets]]
+  description = "Get my global IP address"
+  command = "curl ifconfig.co"
+  output = ""
+
+[[snippets]]
+  description = "terraform fmt"
+  command = "terraform fmt -recursive ."
+  output = ""
+
+[[snippets]]
+  description = "ecr docker login"
+  command = "aws ecr get-login-password | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.$(aws configure get region --profile=$AWS_PROFILE).amazonaws.com"
+  output = ""
+
+[[snippets]]
+  description = "Get Hashicorp vault secrets using cURL"
+  command = "curl -s -X GET -H \"X-Vault-Token:<VAULT_TOKEN=$VAULT_TOKEN>\" <VAULT_ADDR=$VAULT_ADDR>/v1/<ENGINE>/data/<SECRET_PATH> | jq ."
+  output = ""
+
+[[snippets]]
+  description = "Flush OSX Mac DNS Cache"
+  command = "sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder"
+  output = ""
+
+[[snippets]]
+  description = "git remote rebase"
+  command = "git fetch --all --prune --prune-tags && git rebase"
+  output = ""
+
+[[snippets]]
+  description = "Mount RAMDisk (Default 5Gb)"
+  command = "diskutil erasevolume HFS+ \"RAMDisk\" `hdiutil attach -nomount ram://<size=10485760>`"
+  output = ""
+
+[[snippets]]
+  description = "Decode JWT"
+  command = "jq -R 'split(\".\") | select(length > 0) | .[0],.[1] | @base64d | fromjson' <<< $JWT"
+  output = ""
+
+[[snippets]]
+  description = "Git: Search Recursively"
+  command = "git log --branches -i --all -p -S \"<SEARCH_REGEX=$SEARCH_REGEX>\""
+  output = ""
+
+[[snippets]]
+  description = "Git: Get branch containing commit"
+  command = "git branch -a --contains \"<COMMIT_SHA=$COMMIT_SHA>\""
+  output = ""
+
+[[snippets]]
+  description = "Kubernetes: Clear context"
+  command = "kubectl config unset current-context"
+  output = ""
+
+[[snippets]]
+  description = "Postgres: Find long running query"
+  command = "echo \"SELECT pid,  now() - pg_stat_activity.query_start AS duration, query, state FROM pg_stat_activity WHERE (now() - pg_stat_activity.query_start) > interval '5 minutes';\""
+  output = ""
+
+[[snippets]]
+  description = "Remove ALL local branches that are not on remote"
+  command = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+  output = ""
+
+[[snippets]]
+  description = "Check if remote port is open via Bash"
+  command = "timeout 5 bash -c ': < /dev/tcp/google.com/80' && echo OK || echo ERROR"
+  output = ""
+
+[[snippets]]
+  description = "Check if remote port is open via Netcat. Use -u for UDP or -t for TCP"
+  command = "nc -vztw5 google.com 80"
+  output = ""
+
+[[snippets]]
+  description = "List all kubernetes secrets in namespace base64decoded and json output"
+  command = "kubectl get secrets -o json | jq '.items[] | {name: .metadata.name,data: .data|map_values(@base64d)}'"
+  output = ""

@@ -93,17 +93,17 @@ alias t="dstask"
 ##################################################################
 
 ############# https://github.com/knqyf263/pet ####################
-alias pet="pet --config ~/code/dotfiles/pet/config.toml"
+alias pet="pet --config $(chezmoi source-path)/pet/config.toml"
 function add_to_pet() {
   PREV=$(echo `history | tail -n2 | head -n1` | cut -d' ' -f4-)
-  sh -c "pet --config ~/code/dotfiles/pet/config.toml new `printf %q "$PREV"`"
+  sh -c "pet --config $(chezmoi source-path)/pet/config.toml new `printf %q "$PREV"`"
 }
 ##################################################################
 
 #################### https://ohmyposh.dev ########################
 if command -V oh-my-posh > /dev/null
 then
-    eval "$(oh-my-posh --init --shell bash --config ~/code/dotfiles/poshthemes/star.omp.json)"
+    eval "$(oh-my-posh --init --shell bash --config $(chezmoi source-path)/poshthemes/star.omp.json)"
 fi
 ##################################################################
 
