@@ -1,0 +1,6 @@
+[General]
+  snippetfile = "~/.pet/snippet.toml"
+  column = 40
+  selectcmd = "fzf --ansi"
+  color = true
+  sortby = ""
