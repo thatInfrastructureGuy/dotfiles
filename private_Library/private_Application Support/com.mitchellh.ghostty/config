@@ -9,11 +9,12 @@ keybind = control+d=unbind
 keybind = command+f=toggle_fullscreen
 
 # app config
-fullscreen = true
-window-decoration = auto
+fullscreen                    = true
+window-decoration             = auto
 quit-after-last-window-closed = true
 
 # theme
+# ghostty +list-themes
 window-theme                  = dark
 theme                         = Banana Blueberry
 
