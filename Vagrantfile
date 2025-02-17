@@ -29,22 +29,6 @@ $provision = <<-'EOF'
 
 sudo apt-get update
 
-# AWS CLI
-sudo apt-get install -y unzip docker-compose-plugin
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-aws --version
-rm -r aws*
-
-# Golang
-curl -LO "https://go.dev/dl/go1.21.0.linux-amd64.tar.gz"
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
-export PATH=$PATH:/usr/local/go/bin
-go version
-rm go*tar.gz
-
-
 # Kind
 go install sigs.k8s.io/kind@latest
 kind --version
