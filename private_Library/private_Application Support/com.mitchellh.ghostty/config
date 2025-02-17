@@ -16,7 +16,7 @@ quit-after-last-window-closed = true
 # theme
 # ghostty +list-themes
 window-theme                  = dark
-theme                         = Banana Blueberry
+theme                         = IR_Black
 
 # font config
 font-family              = Jetbrains Mono
