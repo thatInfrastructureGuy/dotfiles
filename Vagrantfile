@@ -29,15 +29,16 @@ $provision = <<-'EOF'
 
 sudo apt-get update
 
-uname -m
+os_arch="x86_64"
+([ $(uname -m) = arm64 ] || [ $(uname -m) = aarch64 ]) && os_arch="arm64" 
 
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-arm64
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-${os_arch}
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 
 # Kubectl
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${os_arch}/kubectl"
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${os_arch}/kubectl.sha256"
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 rm kubectl*
