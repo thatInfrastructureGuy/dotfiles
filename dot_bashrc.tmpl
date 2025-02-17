@@ -9,8 +9,8 @@ export KUBE_EDITOR=${EDITOR}
 alias vim='nvim'
 ##################################################################
 
-{{ if eq .chezmoi.os "darwin" -}}
 ################ OS SPECIFIC #####################################
+{{ if eq .chezmoi.os "darwin" -}}
 export BASH_SILENCE_DEPRECATION_WARNING=1
 {{- end }}
 
