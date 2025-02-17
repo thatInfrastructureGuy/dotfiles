@@ -1,9 +1,11 @@
 README.md
 
 {{ if ne .chezmoi.os "darwin" }}
-private_Library/private_Application Support/App/myconfig.yaml
-dot_bash_profile
+private_Library/
+private_Library/**
 {{ end }}
+
 {{ if ne .chezmoi.os "linux" }}
-.config/app/myconfig.yaml
+private_dot_config/
+private_dot_config/**
 {{ end }}
