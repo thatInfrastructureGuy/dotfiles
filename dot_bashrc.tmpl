@@ -14,12 +14,12 @@ alias vim='nvim'
 export BASH_SILENCE_DEPRECATION_WARNING=1
 {{- end }}
 
-## Based on: https://pkg.go.dev/os#UserConfigDir
-{{ if eq .chezmoi.os "darwin" -}}
-export XDG_CONFIG_HOME="$HOME/Library/Application Support"
-{{ else if eq .chezmoi.os "linux" -}}
+# Based on: https://pkg.go.dev/os#UserConfigDir
+# On mac XDG_CONFIG_HOME is supposed to be "$HOME/Library/Application Support"
+# However, this leads to issues because of space in the value. 
+# Eg: See add_to_pet() below, which did not work. Hence, using linux default everywhere.
+# !!NOTE!! Applications may default to "$HOME/Library/Application Support", causing issues. !!NOTE!!
 export XDG_CONFIG_HOME="$HOME/.config"
-{{- end }}
 ##################################################################
 
 ############### https://github.com/homebrew/brew #################
