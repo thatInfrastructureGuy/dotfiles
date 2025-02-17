@@ -1,0 +1,12 @@
+[user]
+	signingkey = 7A53E1F55156C0EF
+	name = thatInfrastructureGuy
+	email = thatInfrastructureGuy@gmail.com
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[push]
+	autoSetupRemote = true
+[help]
+	autocorrect = 30

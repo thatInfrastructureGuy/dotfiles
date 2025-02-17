@@ -1,4 +1,6 @@
 README.md
+Vagrantfile
+Brewfile
 
 {{ if ne .chezmoi.os "darwin" }}
 Library/
