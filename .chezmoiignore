@@ -1,11 +1,11 @@
 README.md
 
 {{ if ne .chezmoi.os "darwin" }}
-private_Library/
-private_Library/**
+Library/
+Library/**
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
-private_dot_config/
-private_dot_config/**
+.config/
+.config/**
 {{ end }}
