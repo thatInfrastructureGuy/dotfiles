@@ -23,3 +23,12 @@ font-family              = Jetbrains Mono
 font-size                = 16
 window-inherit-font-size = true
 
+# cursor
+# needed for vim/term text to show under cursor.
+cursor-opacity = 0.5
+
+# remove padding
+window-padding-y = 0
+window-padding-x = 0
+window-padding-color = extend
+window-padding-balance = true
