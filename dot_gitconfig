@@ -10,3 +10,5 @@
 	autoSetupRemote = true
 [help]
 	autocorrect = 30
+[tag]
+	gpgsign = true
