@@ -5,13 +5,13 @@ require("config.lazy")
 
 -- Clipboard
 -- Instead of vim.opt.clipboard = "unnamedplus", being explicit for clipboard usage
-vim.keymap.set({"n", "v", "x"}, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
-vim.keymap.set({"n", "v", "x"}, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+vim.keymap.set({ "n", "v", "x" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
+vim.keymap.set({ "n", "v", "x" }, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
 
 -- Cursor settings
--- This works ghostty's cursor-opacity
-vim.api.nvim_set_hl(0, "Cursor", {fg='#303030', bg='#909090'})
+-- This should be first set in ghostty's cursor-opacity
 vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-cr:hor20,o:hor50'
+--vim.api.nvim_set_hl(0, "Cursor", {fg='#303030', bg='#909090'})
 
 -- Already default in neovim
 vim.opt.compatible = false
@@ -36,10 +36,10 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Set filetype for a particular extension or filename
-vim.filetype.add{
-	extension = {
-		hcl = "terraform", 
-	},
+vim.filetype.add {
+    extension = {
+        hcl = "terraform",
+    },
 }
 
 -- Set Splits
@@ -55,12 +55,12 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "both" -- or "number"
 vim.opt.cursorcolumn = true
 
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set({"n","v"}, "<space>x", ":.lua<CR>")
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- current file
+vim.keymap.set({ "n", "v" }, "<space>x", ":.lua<CR>")       -- current line
 
 -- Open buffer in split screen
-vim.keymap.set("n","<leader>s", ":ls<CR>:sbuffer<space>")
-vim.keymap.set("n","<leader>v", ":ls<CR>:vertical sbuffer<space>")
+vim.keymap.set("n", "<leader>bs", ":ls<CR>:sbuffer<space>")
+vim.keymap.set("n", "<leader>bv", ":ls<CR>:vertical sbuffer<space>")
 
 -- Inbuild fuzzy search
 -- Use :find filename -> press <tab> and <enter>
@@ -79,9 +79,9 @@ vim.opt.expandtab = true
 
 -- Make hyphen is part of word. Useful for diw/ciw
 -- Should appear after set nocompatible
-vim.opt.iskeyword="@,48-57,_,192-255,#,-"
+vim.opt.iskeyword = "@,48-57,_,192-255,#,-"
 
-vim.opt.mouse="a"
+vim.opt.mouse = "a"
 
 -- Gopass vim credential leakage fix
 -- https://github.com/gopasspw/gopass/blob/master/docs/setup.md#securing-your-editor
@@ -114,7 +114,7 @@ vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 vim.keymap.set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 vim.keymap.set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
--- buffers
+-- Buffers
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
@@ -124,37 +124,142 @@ vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 -- ctrl + u to move a ½ page screen up
 -- ctrl + d to move a ½ page screen down
 
--- NetRW
--- Tree like 
-vim.keymap.set('n', '<C-N>', ":Lexplore<CR> :vertical resize 30<CR>", { noremap = true })
+-- Disable NetRW in Lazy. Instead use Oil
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 -- Ctrl+N to open
 -- v -> vertical split
 -- o -> open
 -- s -> sort
-   -- R -> reverse sort
+-- R -> reverse sort
 -- % -> create file
 -- d -> create directory
 -- D -> delete directory or file
 -- R -> rename
 -- Marks
-   -- mf -> mark a file
-   -- mt -> mark a directory
-   -- :copy or :move on marked files
-   -- md -> delete marks on all files
+-- mf -> mark a file
+-- mt -> mark a directory
+-- :copy or :move on marked files
+-- md -> delete marks on all files
 -- Suggestion: By default, govim populates the quickfix window with diagnostics
 -- reported by gopls after a period of inactivity, the time period being
 -- defined by updatetime (help updatetime). Here we suggest a short updatetime
 -- time in order that govim/Vim are more responsive/IDE-like
-vim.opt.updatetime = 500
+vim.opt.updatetime  = 500
 
 -- Display size for messages
-vim.opt.cmdheight = 1
+vim.opt.cmdheight   = 1
 
 -- Suggestion: turn on auto-indenting. If you want closing parentheses, braces
 -- etc to be added, https://github.com/jiangmiao/auto-pairs. In future we might
 -- include this by default in govim.
-vim.opt.autoindent = true -- default in nvim
+vim.opt.autoindent  = true -- default in nvim
 vim.opt.smartindent = true
 
 -- Suggestion: define sensible backspace behaviour.
-vim.opt.backspace = indent,eol,start
+vim.opt.backspace   = indent, eol, start
+
+-- Maintain undo history between sessions
+vim.opt.undofile    = true
+vim.opt.undodir     = vim.fn.stdpath("data") .. "/undodir"
+
+-- Opening multiple files
+-- $ vim file1.txt file2.txt -- buffers
+-- $ vim -o file1.txt file2.txt -- horizontal splits
+-- $ vim -O file1.txt file2.txt -- vertical splits
+-- $ vim -p file1.txt file2.txt -- tabs
+--
+-- Operations on multiple files
+-- :windo (all windows in the current tab)
+-- :bufdo (all buffers, i.e. all those listed with the :ls command)
+-- :argdo (all files in argument list)
+-- :cdo (all files listed in the quickfix list)
+-- :tabdo (all tabs)
+--
+--  Eg: `:tabdo %s/pattern/replace/gc`
+
+
+-- FzF mapping
+vim.keymap.set("n", "<leader>ff", function() require("fzf-lua").files() end, { silent = true, desc = 'Fzf File Search' })
+vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep_glob, { silent = true, desc = 'Fzf Word Search' })
+vim.keymap.set("n", "<leader>fb", function() require("fzf-lua").resume() end,
+    { silent = true, desc = 'Fzf Resume Search' })
+
+-- complete names with path: files or directories -- no preview
+vim.keymap.set(
+    { "n", "v", "i" }, "<C-x><C-d>",
+    function() require("fzf-lua").complete_path() end,
+    { silent = true, desc = "Fuzzy complete path" }
+)
+
+-- complete names with path: files only with preview
+vim.keymap.set({ "i" }, "<C-x><C-f>",
+    function()
+        require("fzf-lua").complete_file({
+            cmd = "rg --files",
+            winopts = { preview = { hidden = false } },
+        })
+    end,
+    { silent = true, desc = "Fuzzy complete file" }
+)
+
+-- Vim encrypt text blocks with gpg.
+-- gpg.conf is pointing to default "self" recipient
+vim.keymap.set({ "n", "v" }, '<leader>e', ':!gpg --encrypt --yes --always-trust --armor <CR>',
+    { noremap = true, silent = true, desc = 'GPG Encrypt' })
+vim.keymap.set({ "v" }, '<leader>d', ":!gpg -dq<CR>", { noremap = true, desc = 'GPG Decrypt' })
+vim.keymap.set({ "n" }, '<leader>d', ":%!gpg -dq<CR>", { noremap = true, desc = 'GPG Decrypt' })
+-- vim.cmd([[
+-- xnoremap <leader>e :!gpg --encrypt --armor --recipient thatInfrastructureGuy@gmail.com<CR>
+-- xnoremap <leader>d :!gpg -dq<CR>
+-- ]])
+
+
+-- To enable global statusline use laststatus = 3
+-- https://www.youtube.com/watch?v=jH5PNvJIa6o
+vim.opt.laststatus = 2
+
+-- https://www.reddit.com/r/neovim/comments/1dtcplk/winseparator_and_vertsplit/
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffaaff', bg = 'None' })
+
+-- https://www.youtube.com/watch?v=ooTcnx066Do
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('TERMOPEN', { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
+
+local job_id = 0
+vim.keymap.set(
+    "n",
+    '<leader>to',
+    function()
+        vim.cmd.vnew()
+        vim.cmd.term()
+        vim.cmd.wincmd("J")
+        vim.api.nvim_win_set_height(0, 10)
+        job_id = vim.bo.channel
+    end,
+    { desc = "Terminal Open" }
+)
+
+vim.keymap.set(
+    "n",
+    '<leader>tc',
+    function()
+        vim.fn.chansend(job_id, { "clear && go test -v ./...\r\n" })
+    end,
+    { desc = "Terminal Command" }
+)
+
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+
+-- LSP jump to func definition
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
+    end,
+})

@@ -1,5 +1,5 @@
 [General]
-  snippetfile = "~/.pet/snippet.toml"
+  snippetfile = "~/.config/pet/snippet.toml"
   column = 40
   selectcmd = "fzf --ansi"
   color = true
