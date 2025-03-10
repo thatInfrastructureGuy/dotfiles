@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true
 
 require("config.lazy")
+require("config.autocmds")
 
 -- Clipboard
 -- Instead of vim.opt.clipboard = "unnamedplus", being explicit for clipboard usage
@@ -15,7 +16,7 @@ vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-c
 
 -- Already default in neovim
 vim.opt.compatible = false
-vim.opt.syntax = enable
+vim.opt.syntax = "enable"
 vim.opt.hlsearch = true
 vim.opt.encoding = "utf-8"
 vim.opt.ruler = true
@@ -37,9 +38,9 @@ vim.opt.relativenumber = true
 
 -- Set filetype for a particular extension or filename
 vim.filetype.add {
-    extension = {
-        hcl = "terraform",
-    },
+	extension = {
+		hcl = "terraform",
+	},
 }
 
 -- Set Splits
@@ -191,30 +192,30 @@ vim.opt.undodir     = vim.fn.stdpath("data") .. "/undodir"
 vim.keymap.set("n", "<leader>ff", function() require("fzf-lua").files() end, { silent = true, desc = 'Fzf File Search' })
 vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep_glob, { silent = true, desc = 'Fzf Word Search' })
 vim.keymap.set("n", "<leader>fb", function() require("fzf-lua").resume() end,
-    { silent = true, desc = 'Fzf Resume Search' })
+	{ silent = true, desc = 'Fzf Resume Search' })
 
 -- complete names with path: files or directories -- no preview
 vim.keymap.set(
-    { "n", "v", "i" }, "<C-x><C-d>",
-    function() require("fzf-lua").complete_path() end,
-    { silent = true, desc = "Fuzzy complete path" }
+	{ "n", "v", "i" }, "<C-x><C-d>",
+	function() require("fzf-lua").complete_path() end,
+	{ silent = true, desc = "Fuzzy complete path" }
 )
 
 -- complete names with path: files only with preview
 vim.keymap.set({ "i" }, "<C-x><C-f>",
-    function()
-        require("fzf-lua").complete_file({
-            cmd = "rg --files",
-            winopts = { preview = { hidden = false } },
-        })
-    end,
-    { silent = true, desc = "Fuzzy complete file" }
+	function()
+		require("fzf-lua").complete_file({
+			cmd = "rg --files",
+			winopts = { preview = { hidden = false } },
+		})
+	end,
+	{ silent = true, desc = "Fuzzy complete file" }
 )
 
 -- Vim encrypt text blocks with gpg.
 -- gpg.conf is pointing to default "self" recipient
 vim.keymap.set({ "n", "v" }, '<leader>e', ':!gpg --encrypt --yes --always-trust --armor <CR>',
-    { noremap = true, silent = true, desc = 'GPG Encrypt' })
+	{ noremap = true, silent = true, desc = 'GPG Encrypt' })
 vim.keymap.set({ "v" }, '<leader>d', ":!gpg -dq<CR>", { noremap = true, desc = 'GPG Decrypt' })
 vim.keymap.set({ "n" }, '<leader>d', ":%!gpg -dq<CR>", { noremap = true, desc = 'GPG Decrypt' })
 -- vim.cmd([[
@@ -232,42 +233,42 @@ vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffaaff', bg = 'None' })
 
 -- https://www.youtube.com/watch?v=ooTcnx066Do
 vim.api.nvim_create_autocmd('TermOpen', {
-    group = vim.api.nvim_create_augroup('TERMOPEN', { clear = true }),
-    callback = function()
-        vim.opt.number = false
-        vim.opt.relativenumber = false
-    end,
+	group = vim.api.nvim_create_augroup('TERMOPEN', { clear = true }),
+	callback = function()
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+	end,
 })
 
 local job_id = 0
 vim.keymap.set(
-    "n",
-    '<leader>to',
-    function()
-        vim.cmd.vnew()
-        vim.cmd.term()
-        vim.cmd.wincmd("J")
-        vim.api.nvim_win_set_height(0, 10)
-        job_id = vim.bo.channel
-    end,
-    { desc = "Terminal Open" }
+	"n",
+	'<leader>to',
+	function()
+		vim.cmd.vnew()
+		vim.cmd.term()
+		vim.cmd.wincmd("J")
+		vim.api.nvim_win_set_height(0, 10)
+		job_id = vim.bo.channel
+	end,
+	{ desc = "Terminal Open" }
 )
 
 vim.keymap.set(
-    "n",
-    '<leader>tc',
-    function()
-        vim.fn.chansend(job_id, { "clear && go test -v ./...\r\n" })
-    end,
-    { desc = "Terminal Command" }
+	"n",
+	'<leader>tc',
+	function()
+		vim.fn.chansend(job_id, { "clear && go test -v ./...\r\n" })
+	end,
+	{ desc = "Terminal Command" }
 )
 
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- LSP jump to func definition
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
-    end,
+	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+	callback = function(ev)
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
+	end,
 })
