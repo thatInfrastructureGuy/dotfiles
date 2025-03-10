@@ -15,5 +15,8 @@
   "undotree": { "branch": "master", "commit": "76c4e32d8f1aa493bb68d4a3fcd3c700395c303c" },
   "vim-gitgutter": { "branch": "main", "commit": "7b0b5098e3e57be86bb96cfbf2b8902381eef57c" },
   "vim-tmux-navigator": { "branch": "master", "commit": "791dacfcfc8ccb7f6eb1c853050883b03e5a22fe" },
+  "vim-zettel": { "branch": "master", "commit": "340ec4f47e17fdc6afbda260272b5f0c003a45d6" },
+  "vimwiki": { "branch": "dev", "commit": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8" },
+  "vimwiki-sync": { "branch": "master", "commit": "99eeab3402010d89a9a41c9f759cee21ec81922b" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }

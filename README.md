@@ -17,3 +17,9 @@ Chezmoi expects https://github.com/$GITHUB_USERNAME/dotfiles for the command bel
 ```
 ./bin/chezmoi init --apply thatInfrastructureGuy
 ```
+
+### TODO
+
+1. promptBool is broken
+2. Add `let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/.config/nvim_tig/.zettel.tpl"}]`
+
