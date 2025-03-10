@@ -1,8 +1,13 @@
 #!/bin/bash
 
+{{ if $install := promptBool "Do you want to install homebrew and Tmux Plugin Manager?" false }}
 #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins
 
+{{ else }}
+echo "Skipping cloning as per user input."
+{{ end }}
+
 # Download your public key and import it
-gpg --keyserver keyserver.ubuntu.com --recv-keys 7A53E1F55156C0EF
+gpg --keyserver hkp://pgp.mit.edu --recv-keys 7A53E1F55156C0EF

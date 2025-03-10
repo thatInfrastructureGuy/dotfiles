@@ -114,9 +114,17 @@ vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 vim.keymap.set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 vim.keymap.set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
+-- NOTE: DO NOT USE <S-j> or <S-k> since they have inbuilt use cases.
+-- <S-j> move next line up
+-- <S-k> in manpages, go to definition
+
 -- Buffers
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>k", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "<leader>j", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+
+-- Tabs
+vim.keymap.set("n", "<leader>h", "<cmd>tabprevious<CR>", { noremap = true, silent = true, desc = "Prev Tab" })
+vim.keymap.set("n", "<leader>l", "<cmd>tabnext<CR>", { noremap = true, silent = true, desc = "Next Tab" })
 
 --  Page Up/Down
 -- ctrl + b to move a page screen back or “up”

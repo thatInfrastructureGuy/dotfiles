@@ -7,7 +7,8 @@ export LANG=en_US.UTF-8
 export EDITOR=nvim
 export NVIM_APPNAME=nvim_tig
 export KUBE_EDITOR=${EDITOR}
-alias vim='nvim'
+alias vim="${EDITOR}"
+alias vi="${EDITOR}"
 ##################################################################
 
 ################ OS SPECIFIC #####################################
@@ -118,18 +119,28 @@ fi
 ##################################################################
 
 ############### https://github.com/junegunn/fzf ##################
+# FZF completions with ** does not work due to vi mode
+# See: https://github.com/junegunn/fzf/issues/1596#issuecomment-2128091715
 if command -V fzf > /dev/null
 then
     eval "$(fzf --bash)"
+
+    ################ https://github.com/sharkdp/bat ##################
+    if command -V bat > /dev/null
+    then
+        alias inv='"${EDITOR}" -p $(fzf -m --preview "bat --color=always {}")'
+    fi
+    ##################################################################
+
+    ############# https://github.com/BurntSushi/ripgrep ##############
+    if command -V rg > /dev/null
+    then
+        export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+    fi
+    ##################################################################
 fi
 ##################################################################
 
-############# https://github.com/BurntSushi/ripgrep ##############
-if command -V rg > /dev/null
-then
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-fi
-##################################################################
 
 ############# https://github.com/vimwiki/vimwiki #################
 # launch diary from command line:

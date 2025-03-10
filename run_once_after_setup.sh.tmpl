@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{{- promptBool "Do you want to clone private repos?" false -}}
+{{ if $private_git := promptBool "Do you want to clone private repos?" false }}
 echo "Running the script based on user input..."
 git clone git@github.com:thatInfrastructureGuy/pkm.git ${XDG_CONFIG_HOME}/pkm
 {{ else }}
