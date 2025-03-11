@@ -15,12 +15,10 @@ then
     eval "$(${BREW} shellenv)"
 fi
 
-
-export TPM_PLUGINS_DIR="~/.tmux/plugins/tpm"
+export TPM_PLUGINS_DIR="${HOME}/.tmux/plugins/tpm"
 if [ ! -d "${TPM_PLUGINS_DIR}" ]; then
     git clone https://github.com/tmux-plugins/tpm ${TPM_PLUGINS_DIR} && ${TPM_PLUGINS_DIR}/bin/install_plugins
 fi
-
 
 # Define the key ID or key fingerprint
 PGP_KEY_ID="7A53E1F55156C0EF"
