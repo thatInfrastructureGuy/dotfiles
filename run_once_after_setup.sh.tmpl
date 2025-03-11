@@ -1,8 +1,7 @@
 #!/bin/bash
 
-{{ if $private_git := promptBool "Do you want to clone private repos?" false }}
-echo "Running the script based on user input..."
-git clone git@github.com:thatInfrastructureGuy/pkm.git ${XDG_CONFIG_HOME}/pkm
-{{ else }}
-echo "Skipping cloning as per user input."
-{{ end }}
+export PKM_DIR="~/.config/pkm"
+
+if [ ! -d "$PKM_DIR" ]; then
+    git clone git@github.com:thatInfrastructureGuy/pkm.git ${PKM_DIR}
+fi

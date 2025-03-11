@@ -1,13 +1,37 @@
 #!/bin/bash
 
-{{ if $install := promptBool "Do you want to install homebrew and Tmux Plugin Manager?" false }}
-#/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") -}}
+BREW_PREFIX="/opt/homebrew"
+{{ else if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "amd64") -}}
+BREW_PREFIX="/usr/local"
+{{ else if eq .chezmoi.os "linux" -}}
+BREW_PREFIX="/home/linuxbrew/.linuxbrew"
+{{- end }}
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins
+BREW="${BREW_PREFIX}/bin/brew"
+if command -V ${BREW} > /dev/null
+then
+    #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(${BREW} shellenv)"
+fi
 
-{{ else }}
-echo "Skipping cloning as per user input."
-{{ end }}
 
-# Download your public key and import it
-gpg --keyserver hkp://pgp.mit.edu --recv-keys 7A53E1F55156C0EF
+export TPM_PLUGINS_DIR="~/.tmux/plugins/tpm"
+if [ ! -d "${TPM_PLUGINS_DIR}" ]; then
+    git clone https://github.com/tmux-plugins/tpm ${TPM_PLUGINS_DIR} && ${TPM_PLUGINS_DIR}/bin/install_plugins
+fi
+
+
+# Define the key ID or key fingerprint
+PGP_KEY_ID="7A53E1F55156C0EF"
+
+# Check if the key already exists in the keyring
+if ! gpg --list-keys "$PGP_KEY_ID" &>/dev/null; then
+  echo "PGP key not found. Installing..."
+
+  gpg --keyserver hkp://pgp.mit.edu --recv-keys $PGP_KEY_ID
+  
+  echo "PGP key installed successfully."
+else
+  echo "PGP key already exists."
+fi
