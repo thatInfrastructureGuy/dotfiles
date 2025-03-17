@@ -22,6 +22,7 @@ local M = {
         lsp.lua_ls.setup { capabilities = capabilities }
         lsp.gopls.setup { capabilities = capabilities }
         lsp.pyright.setup { capabilities = capabilities }
+        lsp.zk.setup { capabilities = capabilities }
 
         vim.api.nvim_create_autocmd('LspAttach', {
             callback = function(args)
