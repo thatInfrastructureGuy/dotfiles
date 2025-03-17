@@ -130,6 +130,13 @@ then
 fi
 ##################################################################
 
+######### https://github.com/zk-org/zk ###############
+if command -V zk > /dev/null
+then
+    alias zk='zk --notebook-dir=${XDG_CONFIG_HOME}/pkm --working-dir=${XDG_CONFIG_HOME}/pkm'
+fi
+##################################################################
+
 ############### https://github.com/junegunn/fzf ##################
 # FZF completions with ** does not work due to vi mode
 # See: https://github.com/junegunn/fzf/issues/1596#issuecomment-2128091715
