@@ -41,10 +41,6 @@ then
     eval "$(${BREW} shellenv)"
 fi
 
-if brew list python &> /dev/null
-then
-    export PATH="$(brew --prefix python)/libexec/bin:$PATH"
-fi
 ##################################################################
 
 ###################### Yubikey Git ###############################
@@ -82,7 +78,6 @@ fi
 ######################## Golang ##################################
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
 ##################################################################
 
 ####################### Bash History Tweaks ######################
@@ -95,7 +90,6 @@ export HISTCONTROL=ignoreboth:erasedups
 # Show date/time in bash history
 export HISTTIMEFORMAT="%m/%d/%y %T "
 ##################################################################
-
 
 ############### https://github.com/naggie/dstask #################
 alias t="dstask"
@@ -170,4 +164,11 @@ alias vw='${EDITOR} -c ":VimwikiIndex"'
 
 # convert a file into zettel
 alias vz='${EDITOR} -c ZettelCapture'
+##################################################################
+
+########################## Global Path ###########################
+# Please just update PATH in one place.
+# "brew --prefix python" will succeed, even if python is **not** installed
+# Not checking for installed python using `brew list python`,as it is SLOW.
+export PATH="$PATH:$GOBIN:$(brew --prefix python)/libexec/bin"
 ##################################################################
