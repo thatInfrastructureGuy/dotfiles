@@ -172,3 +172,7 @@ alias vz='${EDITOR} -c ZettelCapture'
 # Not checking for installed python using `brew list python`,as it is SLOW.
 export PATH="$PATH:$GOBIN:$(brew --prefix python)/libexec/bin"
 ##################################################################
+
+###################### Bash Completion ###########################
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+##################################################################

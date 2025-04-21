@@ -19,10 +19,27 @@ local M = {
     config = function()
         local capabilities = require('blink.cmp').get_lsp_capabilities()
         local lsp = require("lspconfig")
+        -- Lua
         lsp.lua_ls.setup { capabilities = capabilities }
+        -- Go
         lsp.gopls.setup { capabilities = capabilities }
-        lsp.pyright.setup { capabilities = capabilities }
-        lsp.zk.setup { capabilities = capabilities }
+        -- Python
+        lsp.ruff.setup { capabilities = capabilities }
+        lsp.pyright.setup {
+            capabilities = capabilities,
+            settings = {
+                pyright = {
+                    -- Using Ruff's import organizer
+                    disableOrganizeImports = true,
+                },
+                python = {
+                    analysis = {
+                        -- Ignore all files for analysis to exclusively use Ruff for linting
+                        ignore = { '*' },
+                    },
+                },
+            },
+        }
 
         vim.api.nvim_create_autocmd('LspAttach', {
             callback = function(args)
