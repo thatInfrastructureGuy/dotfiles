@@ -51,6 +51,7 @@
 [[snippets]]
   description = "Get Hashicorp vault secrets using cURL"
   command = "curl -s -X GET -H \"X-Vault-Token:<VAULT_TOKEN=$VAULT_TOKEN>\" <VAULT_ADDR=$VAULT_ADDR>/v1/<ENGINE>/data/<SECRET_PATH> | jq ."
+  tag = ["vault", "secret"]
   output = ""
 
 [[snippets]]
@@ -111,4 +112,10 @@
 [[snippets]]
   description = "List all kubernetes secrets in namespace base64decoded and json output"
   command = "kubectl get secrets -o json | jq '.items[] | {name: .metadata.name,data: .data|map_values(@base64d)}'"
+  output = ""
+
+[[snippets]]
+  description = "Generate Vault Token with extended TTL"
+  command = "vault token create -ttl <TTL=12h> <policy=-orphan -no-default-policy -policy=admin> -display-name=$HOSTNAME -explicit-max-ttl=<TTL=12h> -metadata=created-for=$HOSTNAME -field=token"
+  tag = ["vault", "token"]
   output = ""
