@@ -21,4 +21,3 @@ Chezmoi expects https://github.com/$GITHUB_USERNAME/dotfiles for the command bel
 ### TODO
 
 1. Add `let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/.config/nvim_tig/.zettel.tpl"}]`
-
