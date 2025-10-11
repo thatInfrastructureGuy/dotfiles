@@ -22,3 +22,17 @@ Chezmoi expects https://github.com/$GITHUB_USERNAME/dotfiles for the command bel
 
 1. Add `let g:zettel_options = [{"front_matter" : [["tags", ""], ["citations", ""]], "template" :  "~/.config/nvim_tig/.zettel.tpl"}]`
 
+---
+
+### Old Instructions
+
+```sh
+gpg --keyserver keyserver.ubuntu.com --recv-keys 7A53E1F55156C0EF
+
+gpg-connect-agent updatestartuptty /bye > /dev/null
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+# to commit with signing
+export GPG_TTY=$(tty)
+```
