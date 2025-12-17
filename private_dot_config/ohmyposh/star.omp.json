@@ -12,7 +12,7 @@
           "style": "plain"
         },
         {
-          "properties": {
+          "options": {
             "style": "folder"
           },
           "template": "{{ .Path }} ",
@@ -21,7 +21,7 @@
           "style": "plain"
         },
         {
-          "properties": {
+          "options": {
             "fetch_status": true
           },
           "template": "<#ffffff>on</> {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
@@ -30,7 +30,7 @@
           "style": "plain"
         },
         {
-          "properties": {
+          "options": {
             "fetch_version": true
           },
           "type": "node",
@@ -41,7 +41,7 @@
 	  "template": "  {{ .Full }} "
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
 	  "template": "  {{ .Full }} ",
@@ -52,7 +52,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": " \ue7ad {{.Profile}}{{if .Region}}@{{.Region}}{{end}}",
@@ -63,7 +63,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": " \ufd31 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
@@ -74,7 +74,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": "x{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
@@ -89,7 +89,7 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": "➜ ",
@@ -101,5 +101,5 @@
       "newline": true
     }
   ],
-  "version": 3
+  "version": 4
 }
