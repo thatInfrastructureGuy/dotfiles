@@ -13,6 +13,8 @@ if command -V ${BREW} > /dev/null
 then
     #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(${BREW} shellenv)"
+    # Ideally we should install packages but the packages are not configured right. The Brewfiles are kept for reference but not installation
+    # brew bundle install --file={{ .chezmoi.sourceDir }}/{{ .chezmoi.os }}.Brewfile
 fi
 
 export TPM_PLUGINS_DIR="${HOME}/.tmux/plugins/tpm"
@@ -20,16 +22,4 @@ if [ ! -d "${TPM_PLUGINS_DIR}" ]; then
     git clone https://github.com/tmux-plugins/tpm ${TPM_PLUGINS_DIR} && ${TPM_PLUGINS_DIR}/bin/install_plugins
 fi
 
-# Define the key ID or key fingerprint
-PGP_KEY_ID="7A53E1F55156C0EF"
-
-# Check if the key already exists in the keyring
-if ! gpg --list-keys "$PGP_KEY_ID" &>/dev/null; then
-  echo "PGP key not found. Installing..."
-
-  gpg --keyserver hkp://pgp.mit.edu --recv-keys $PGP_KEY_ID
-  
-  echo "PGP key installed successfully."
-else
-  echo "PGP key already exists."
-fi
+curl -s https://github.com/thatInfrastructureGuy.gpg | gpg --import

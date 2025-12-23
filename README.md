@@ -14,6 +14,12 @@ This is temporary install before chezmoi is installed by package-manager again.
 
 Chezmoi expects https://github.com/$GITHUB_USERNAME/dotfiles for the command below to run. 
 
+> [!IMPORTANT]
+> Keys will not be published to keyservers going forward.
+> Use https://github.com/thatInfrastructureGuy.gpg for public GPG key.
+> Use https://github.com/thatInfrastructureGuy.keys for public SSH key.
+
+
 ```
 ./bin/chezmoi init --apply thatInfrastructureGuy
 ```
