@@ -92,6 +92,8 @@ export HISTTIMEFORMAT="%m/%d/%y %T "
 ##################################################################
 
 ############### https://github.com/naggie/dstask #################
+export DSTASK_GIT_REPO="${HOME}/.config/dstask"
+
 alias t="dstask"
 ##################################################################
 
@@ -154,7 +156,6 @@ then
 fi
 ##################################################################
 
-
 ############# https://github.com/vimwiki/vimwiki #################
 # launch diary from command line:
 alias diary='${EDITOR} -c ":VimwikiMakeDiaryNote"'
@@ -164,10 +165,6 @@ alias vw='${EDITOR} -c ":VimwikiIndex"'
 
 # convert a file into zettel
 alias vz='${EDITOR} -c ZettelCapture'
-##################################################################
-
-############ https://github.com/naggie/dstask ####################
-export DSTASK_GIT_REPO="${HOME}/.config/dstask"
 ##################################################################
 
 ########################## Global Path ###########################
