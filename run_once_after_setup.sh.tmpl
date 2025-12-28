@@ -5,3 +5,9 @@ export PKM_DIR="${HOME}/.config/pkm"
 if [ ! -d "$PKM_DIR" ]; then
     git clone git@github.com:thatInfrastructureGuy/pkm.git ${PKM_DIR}
 fi
+
+export DSTASK_GIT_REPO="${HOME}/.config/dstask"
+
+if [ ! -d "$DSTASK_GIT_REPO" ]; then
+    git clone git@github.com:thatInfrastructureGuy/dstask.git ${DSTASK_GIT_REPO}
+fi
