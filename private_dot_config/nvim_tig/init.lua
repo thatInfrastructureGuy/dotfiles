@@ -266,7 +266,7 @@ vim.keymap.set(
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
 vim.diagnostic.config({
-    virtual_lines = true,
+    --virtual_lines = true,
     virtual_text = true,
     severity_sort = true,
     underline = true,
