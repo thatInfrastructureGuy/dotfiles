@@ -1,28 +1,28 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
-    build = function()
-        require("nvim-treesitter.install").update({ with_sync = true })()
-    end, 
-    config = function ()
-	local configs = require("nvim-treesitter.configs")
-	configs.setup({
-		ensure_installed = {
+    branch = "main",
+    build = ':TSUpdate',
+    config = function()
+        require('nvim-treesitter').install({
+            "bash",
+            "dockerfile",
+            "python",
+            "typescript",
 			"lua", 
 			"vim",
 			"vimdoc",
 			"javascript", 
 			"html", 
 			"terraform", 
-			"go"
-		},
-        	sync_install = false,
-        	highlight = {
-			enable = true 
-		},
-        	indent = { 
-			enable = true
-		},
-	})
+			"go",
+        })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            callback = function()
+              pcall(vim.treesitter.start)
+            end,
+        })
+
     end
 }
 

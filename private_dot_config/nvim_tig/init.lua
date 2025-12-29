@@ -265,6 +265,20 @@ vim.keymap.set(
 
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
+vim.diagnostic.config({
+    virtual_lines = true,
+    virtual_text = true,
+    severity_sort = true,
+    underline = true,
+
+})
+
+-- Enable LSPs
+vim.lsp.enable({
+    "gopls",
+    "lua_ls"
+})
+
 -- LSP jump to func definition
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
