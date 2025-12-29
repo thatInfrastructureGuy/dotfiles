@@ -134,7 +134,7 @@ vim.keymap.set("n", "<leader>l", "<cmd>tabnext<CR>", { noremap = true, silent = 
 -- ctrl + d to move a ½ page screen down
 
 -- Disable NetRW in Lazy. Instead use Oil
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<CMD>Oil --preview<CR>", { desc = "Open parent directory" })
 
 -- Ctrl+N to open
 -- v -> vertical split
