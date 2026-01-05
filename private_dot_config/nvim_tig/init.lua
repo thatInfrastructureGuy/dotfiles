@@ -190,7 +190,7 @@ vim.opt.undodir     = vim.fn.stdpath("data") .. "/undodir"
 
 -- FzF mapping
 vim.keymap.set("n", "<leader>ff", function() require("fzf-lua").files() end, { silent = true, desc = 'Fzf File Search' })
-vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep_glob, { silent = true, desc = 'Fzf Word Search' })
+vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep, { silent = true, desc = 'Fzf Word Search' })
 vim.keymap.set("n", "<leader>fb", function() require("fzf-lua").resume() end,
 	{ silent = true, desc = 'Fzf Resume Search' })
 
