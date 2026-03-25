@@ -6,6 +6,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- Open Oil when nvim is opened with a directory
+vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "Open Oil when opening a directory",
+    group = vim.api.nvim_create_augroup("oil-directory", { clear = true }),
+    callback = function()
+        local arg = vim.fn.argv(0)
+        if arg and vim.fn.isdirectory(arg) == 1 then
+            require("oil").open(arg)
+        end
+    end,
+})
+
 -- TJ DeVries
 -- https://www.youtube.com/watch?v=9gUatBHuXE0
 -- https://www.youtube.com/watch?v=HlfjpstqXwE

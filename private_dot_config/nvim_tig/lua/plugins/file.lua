@@ -12,6 +12,7 @@ local M = {
         },
         preview = {
             border = "rounded",
+            update_on_cursor_moved = true,
         },
         keymaps = {
             ["g?"] = "actions.show_help",

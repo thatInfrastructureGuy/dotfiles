@@ -116,7 +116,7 @@ if command -V oh-my-posh > /dev/null
 then
     # Toggle oh-my-posh on/off
     posh-off() { unset PROMPT_COMMAND && export PS1="\u@\h:\w\$ "; }
-    posh-on() { eval "$(oh-my-posh --init --shell bash --config "${XDG_CONFIG_HOME}"/ohmyposh/star-fast.omp.json)"; }
+    posh-on() { eval "$(oh-my-posh --init --shell bash --config "${XDG_CONFIG_HOME}"/ohmyposh/star.omp.json)"; }
 
     # Check OMP environment variable (default: enabled)
     # In shell: export OMP=false
