@@ -2,6 +2,13 @@ local M = {
     "ibhagwan/fzf-lua",
     dependencies = { "echasnovski/mini.icons" },
     -- dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+        { "<leader>ff", desc = "Fzf File Search" },
+        { "<leader>fg", desc = "Fzf Word Search" },
+        { "<leader>fb", desc = "Fzf Resume Search" },
+        { "<C-x><C-f>", mode = "i", desc = "Fzf Complete Path" },
+        { "<C-x><C-l>", mode = "i", desc = "Fzf Complete File" },
+    },
     opts = {
         grep = {
             rg_opts =

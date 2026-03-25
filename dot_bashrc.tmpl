@@ -81,7 +81,7 @@ export GOBIN=$GOPATH/bin
 ##################################################################
 
 ####################### Bash History Tweaks ######################
-# Append to history. Dont overwrite
+# Append to history. Dont overwrite (critical for tmux!)
 shopt -s histappend
 export HISTSIZE=2000
 export HISTFILESIZE=5000
@@ -89,6 +89,12 @@ export HISTFILESIZE=5000
 export HISTCONTROL=ignoreboth:erasedups
 # Show date/time in bash history
 export HISTTIMEFORMAT="%m/%d/%y %T "
+# TMUX OPTIMIZATION: Save and reload history after each command
+# Prevents history loss in long-running tmux sessions
+if [[ -n "$TMUX" ]]; then
+    # Save history immediately, then read new entries from other sessions
+    export PROMPT_COMMAND="history -a; history -n${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+fi
 ##################################################################
 
 ############### https://github.com/naggie/dstask #################
@@ -108,21 +114,24 @@ function add_to_pet() {
 #################### https://ohmyposh.dev ########################
 if command -V oh-my-posh > /dev/null
 then
-    eval "$(oh-my-posh --init --shell bash --config "${XDG_CONFIG_HOME}"/ohmyposh/star.omp.json)"
+    # Toggle oh-my-posh on/off
+    posh-off() { unset PROMPT_COMMAND && export PS1="\u@\h:\w\$ "; }
+    posh-on() { eval "$(oh-my-posh --init --shell bash --config "${XDG_CONFIG_HOME}"/ohmyposh/star-fast.omp.json)"; }
+
+    # Check OMP environment variable (default: enabled)
+    if [[ "${OMP}" == "false" ]]; then
+        posh-off
+    else
+        posh-on
+    fi
 fi
+
 ##################################################################
 
 ############ https://github.com/gsamokovarov/jump ################
 if command -V jump > /dev/null
 then
     eval "$(jump shell)"
-fi
-##################################################################
-
-######### https://github.com/mfontanini/presenterm ###############
-if command -V presenterm > /dev/null
-then
-    alias presenterm='presenterm --image-protocol kitty-local -x'
 fi
 ##################################################################
 
@@ -156,24 +165,12 @@ then
 fi
 ##################################################################
 
-############# https://github.com/vimwiki/vimwiki #################
-# launch diary from command line:
-alias diary='${EDITOR} -c ":VimwikiMakeDiaryNote"'
-
-# launch index page from command line
-alias vw='${EDITOR} -c ":VimwikiIndex"'
-
-# convert a file into zettel
-alias vz='${EDITOR} -c ZettelCapture'
-##################################################################
-
 ########################## Global Path ###########################
 # Please just update PATH in one place.
-# "brew --prefix python" will succeed, even if python is **not** installed
-# Not checking for installed python using `brew list python`,as it is SLOW.
-export PATH="$PATH:$GOBIN:$(brew --prefix python)/libexec/bin"
+# Using python@3 symlink which auto-updates to latest Python 3.x version
+export PATH="$PATH:$GOBIN:${BREW_PREFIX}/opt/python@3/libexec/bin"
 ##################################################################
 
 ###################### Bash Completion ###########################
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+[[ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]] && source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh"
 ##################################################################

@@ -47,9 +47,9 @@ vim.filetype.add {
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- Set scrolls
-vim.opt.scrolloff = 9999
-vim.opt.sidescrolloff = 9999
+-- Set scrolls (keep cursor away from edges)
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 
 -- Highlight cursor row number and column
 vim.opt.cursorline = true
@@ -134,7 +134,7 @@ vim.keymap.set("n", "<leader>l", "<cmd>tabnext<CR>", { noremap = true, silent = 
 -- ctrl + d to move a ½ page screen down
 
 -- Disable NetRW in Lazy. Instead use Oil
-vim.keymap.set("n", "-", "<CMD>Oil --preview<CR>", { desc = "Open parent directory" })
+-- Keybinding is configured in lua/plugins/file.lua with lazy loading
 
 -- Ctrl+N to open
 -- v -> vertical split
@@ -271,12 +271,6 @@ vim.diagnostic.config({
     severity_sort = true,
     underline = true,
 
-})
-
--- Enable LSPs
-vim.lsp.enable({
-    "gopls",
-    "lua_ls"
 })
 
 -- LSP jump to func definition

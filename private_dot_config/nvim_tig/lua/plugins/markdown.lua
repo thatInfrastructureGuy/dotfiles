@@ -3,6 +3,7 @@ return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        ft = "markdown",  -- Only load on markdown files
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {},
@@ -10,6 +11,7 @@ return {
     -- ZK Specific nvim bindings
     {
         "zk-org/zk-nvim",
+        ft = "markdown",  -- Only load on markdown files
         config = function()
             require("zk").setup({
                 -- Can be "telescope", "fzf", "fzf_lua", "minipick", "snacks_picker",

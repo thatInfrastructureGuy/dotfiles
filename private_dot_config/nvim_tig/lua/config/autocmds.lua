@@ -44,23 +44,26 @@ vim.api.nvim_create_user_command("AutoRunOnSave", function()
 end, {})
 
 -- HugeFile
--- If file size more than 1 Mb disable all plugins and syntax highlight
+-- If file size more than 1 MB disable heavy features for performance
 vim.api.nvim_create_autocmd("BufReadPre", {
     group = vim.api.nvim_create_augroup("HugeFile", { clear = true }),
     callback = function(args)
         local file_size = vim.fn.getfsize(args.file)
         if file_size > 1024 * 1024 then -- 1 MB
-            -- Disable all plugins by setting their `loaded` variables
-            for name, _ in pairs(package.loaded) do
-                if name:match("^.*nvim") or name:match("^.*vim") then
-                    package.loaded[name] = nil
-                end
-            end
-
-            -- Disable additional features for performance
+            -- Disable heavy features safely
+            vim.b.large_file = true
             vim.cmd("syntax off")
-            vim.cmd("set eventignore=all")
-            vim.notify("File larger than 1MB, all plugins disabled for performance")
+            vim.opt_local.spell = false
+            vim.opt_local.swapfile = false
+            vim.opt_local.undofile = false
+            vim.opt_local.foldmethod = "manual"
+
+            -- Disable treesitter for this buffer
+            vim.schedule(function()
+                pcall(vim.treesitter.stop, args.buf)
+            end)
+
+            vim.notify("Large file detected (>1MB), heavy features disabled", vim.log.levels.WARN)
         end
     end,
 })

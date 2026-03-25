@@ -19,7 +19,8 @@ return {
         "nyoom-engineering/oxocarbon.nvim",
         name = "oxocarbon", -- inspired by IBM Carbon.
         enabled = true,
-        priority = 1000,
+        lazy = false,  -- Colorscheme must load at startup for UI
+        priority = 1000,  -- Load before other plugins
         config = function()
             vim.opt.background = "dark" -- light or dark
             vim.cmd.colorscheme "oxocarbon"

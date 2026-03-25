@@ -3,6 +3,7 @@ return {
         'echasnovski/mini.nvim',
         enabled = true,
         version = false,
+        event = "VeryLazy",  -- Load after startup for UI features
         config = function()
             require("mini.statusline").setup()
             require("mini.surround").setup()
