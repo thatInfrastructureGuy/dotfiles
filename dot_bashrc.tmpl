@@ -119,6 +119,8 @@ then
     posh-on() { eval "$(oh-my-posh --init --shell bash --config "${XDG_CONFIG_HOME}"/ohmyposh/star-fast.omp.json)"; }
 
     # Check OMP environment variable (default: enabled)
+    # In shell: export OMP=false
+    # In tmux: tmux set-environment -g OMP false
     if [[ "${OMP}" == "false" ]]; then
         posh-off
     else
