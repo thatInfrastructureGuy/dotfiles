@@ -147,3 +147,9 @@
   Output = ""
   Tag = []
   command = "xattr -dr com.apple.quarantine /Applications/<App=LibreWolf>.app"
+
+[[Snippets]]
+  Description = "Check why git ignored this file"
+  Output = ""
+  Tag = []
+  command = "git check-ignore -v <Location>"
