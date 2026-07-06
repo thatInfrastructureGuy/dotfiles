@@ -2,6 +2,8 @@
 	signingkey = 7A53E1F55156C0EF
 	name = thatInfrastructureGuy
 	email = thatInfrastructureGuy@gmail.com
+[core]
+    excludesfile = "~/.gitignore_global"
 [commit]
 	gpgsign = true
 [gpg]
