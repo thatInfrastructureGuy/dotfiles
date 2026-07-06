@@ -1,4 +1,3 @@
-
 [[Snippets]]
   Description = "Create a .keep file in all empty directories"
   Output = ""
