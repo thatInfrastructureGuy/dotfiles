@@ -1,34 +1,29 @@
+-- TEMPORARY: testing the "main" branch (full rewrite, requires Neovim 0.12+)
+-- to see if it resolves https://github.com/nvim-treesitter/nvim-treesitter/issues/8618
+-- without the manual query_predicates.lua compat workaround.
+-- "main" does not support lazy-loading, hence lazy = false.
 local M = {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",  -- Just update existing parsers on plugin update
-    event = { "BufReadPost", "BufNewFile" },
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
     config = function()
-        -- Add treesitter runtime path
-        local treesitter_path = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter"
-        vim.opt.runtimepath:append(treesitter_path .. "/runtime")
-
         -- List of parsers to ensure are installed
         local parsers_to_install = {
             "bash", "dockerfile", "python", "typescript", "tsx",
             "lua", "vim", "vimdoc", "javascript", "html",
-            "terraform", "go", "yaml"
+            "terraform", "go", "yaml", "markdown", "markdown_inline"
         }
 
-        -- Install missing parsers asynchronously (only once per session)
-        local install_attempted = false
-        vim.schedule(function()
-            if not install_attempted then
-                install_attempted = true
-                for _, parser in ipairs(parsers_to_install) do
-                    -- Check if parser is installed
-                    local parser_path = treesitter_path .. "/parser/" .. parser .. ".so"
-                    if vim.fn.filereadable(parser_path) == 0 then
-                        vim.notify("Installing " .. parser .. " parser...", vim.log.levels.INFO)
-                        vim.cmd("TSInstall " .. parser)
-                    end
-                end
-            end
-        end)
+        local installed = require("nvim-treesitter.config").get_installed("parsers")
+        local missing = vim.tbl_filter(function(p)
+            return not vim.list_contains(installed, p)
+        end, parsers_to_install)
+
+        if #missing > 0 then
+            vim.notify("Installing parsers: " .. table.concat(missing, ", "), vim.log.levels.INFO)
+            require("nvim-treesitter").install(missing)
+        end
 
         -- Enable highlighting for current and future buffers
         local function start_treesitter()
@@ -38,7 +33,8 @@ local M = {
                 javascript = true, typescript = true,
                 javascriptreact = true, typescriptreact = true,
                 bash = true, sh = true, html = true,
-                terraform = true, vim = true, yaml = true
+                terraform = true, vim = true, yaml = true,
+                markdown = true
             }
 
             if supported[ft] and vim.bo.buftype == "" then
