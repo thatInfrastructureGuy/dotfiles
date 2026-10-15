@@ -20,7 +20,7 @@ theme        = Builtin Pastel Dark
 
 # font config
 font-family              = Jetbrains Mono
-font-size                = 16
+font-size                = 14
 window-inherit-font-size = true
 
 # cursor

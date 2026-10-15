@@ -59,12 +59,6 @@
   command = "aws ecr get-login-password | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.$(aws configure get region --profile=$AWS_PROFILE).amazonaws.com"
 
 [[Snippets]]
-  Description = "Get Hashicorp vault secrets using cURL"
-  Output = ""
-  Tag = ["vault", "secret"]
-  command = "curl -s -X GET -H \"X-Vault-Token:<VAULT_TOKEN=$VAULT_TOKEN>\" <VAULT_ADDR=$VAULT_ADDR>/v1/<ENGINE>/data/<SECRET_PATH> | jq ."
-
-[[Snippets]]
   Description = "Flush OSX Mac DNS Cache"
   Output = ""
   Tag = []
@@ -137,10 +131,10 @@
   command = "kubectl get secrets -o json | jq '.items[] | {name: .metadata.name,data: .data|map_values(@base64d)}'"
 
 [[Snippets]]
-  Description = "Generate Vault Token with extended TTL"
+  Description = 'Generate Vault Token with extended TTL. Usage: export VAULT_TOKEN=$(eval "$(pet search)")'
   Output = ""
   Tag = ["vault", "token"]
-  command = "vault token create -ttl <TTL=12h> <policy=-orphan -no-default-policy -policy=admin> -display-name=$HOSTNAME -explicit-max-ttl=<TTL=12h> -metadata=created-for=$HOSTNAME -field=token"
+  command = "VAULT_TOKEN=<VAULT_TOKEN> vault token create -ttl <TTL=12h> <policy=-orphan -no-default-policy -policy=admin> -display-name=$HOSTNAME -explicit-max-ttl=<TTL=12h> -metadata=created-for=$HOSTNAME -field=token"
 
 [[Snippets]]
   Description = "Remove the quarantine attribute from the Application. Ref: https://librewolf.net/docs/faq/#why-is-librewolf-marked-as-broken"
