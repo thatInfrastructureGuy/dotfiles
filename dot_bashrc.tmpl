@@ -97,11 +97,13 @@ if [[ -n "$TMUX" ]]; then
 fi
 ##################################################################
 
+{{- if (ne .chezmoi.os "darwin") }}
 ############### https://github.com/naggie/dstask #################
 export DSTASK_GIT_REPO="${HOME}/.config/dstask"
 
 alias t="dstask"
 ##################################################################
+{{- end }}
 
 ############# https://github.com/knqyf263/pet ####################
 alias pet="pet --config "${XDG_CONFIG_HOME}"/pet/config.toml"
@@ -137,12 +139,14 @@ then
 fi
 ##################################################################
 
+{{- if (ne .chezmoi.os "darwin") }}
 ######### https://github.com/zk-org/zk ###############
 if command -V zk > /dev/null
 then
     alias zk='zk --notebook-dir=${XDG_CONFIG_HOME}/pkm --working-dir=${XDG_CONFIG_HOME}/pkm'
 fi
 ##################################################################
+{{- end }}
 
 ############### https://github.com/junegunn/fzf ##################
 # FZF completions with ** does not work due to vi mode

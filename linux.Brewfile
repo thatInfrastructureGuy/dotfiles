@@ -1,5 +1,6 @@
 brew "bat"
 brew "chezmoi"
+brew "dstask"
 brew "fzf"
 brew "git"
 brew "go"
