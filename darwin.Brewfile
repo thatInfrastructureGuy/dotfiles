@@ -103,7 +103,6 @@ cask "goreleaser"
 cask "librewolf", args: { no_quarantine: true }
 cask "microsoft-auto-update"
 cask "microsoft-outlook"
-cask "obsidian"
 cask "slack"
 cask "twingate"
 cask "windows-app"
