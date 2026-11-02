@@ -20,7 +20,28 @@ local M = {
     config = function()
         -- Use modern vim.lsp.config API (Neovim 0.11+)
         -- Configure LSP servers
-        vim.lsp.config.gopls = {}
+        vim.lsp.config.gopls = {
+            settings = {
+                gopls = {
+                    gofumpt = true,              -- stricter gofmt
+                    staticcheck = true,          -- staticcheck diagnostics (bug/simplify/perf hints)
+                    vulncheck = "Imports",       -- flag calls to known-vulnerable dependencies
+                    analyses = {
+                        unusedparams = true,
+                        unusedwrite = true,
+                        nilness = true,
+                        shadow = true,
+                    },
+                    hints = {                    -- inlay hints
+                        compositeLiteralFields = true,
+                        parameterNames = true,
+                        assignVariableTypes = true,
+                        functionTypeParameters = true,
+                    },
+                },
+            },
+        }
+        vim.lsp.config.golangci_lint_ls = {}
         vim.lsp.config.lua_ls = {}
         vim.lsp.config.pyright = {}
         vim.lsp.config.ts_ls = {}
@@ -34,6 +55,7 @@ local M = {
 
             if ft == "go" then
                 vim.lsp.enable("gopls")
+                vim.lsp.enable("golangci_lint_ls")
             elseif ft == "lua" then
                 vim.lsp.enable("lua_ls")
             elseif ft == "python" then
@@ -52,6 +74,21 @@ local M = {
         vim.api.nvim_create_autocmd("FileType", {
             pattern = { "go", "lua", "python", "javascript", "typescript", "javascriptreact", "typescriptreact", "terraform" },
             callback = enable_lsp_for_filetype,
+        })
+
+        -- Format on save (gopls formats + fixes imports)
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                if client and client:supports_method("textDocument/formatting") then
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        buffer = args.buf,
+                        callback = function()
+                            vim.lsp.buf.format({ bufnr = args.buf })
+                        end,
+                    })
+                end
+            end,
         })
     end,
 }
